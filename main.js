@@ -19,11 +19,26 @@ app.use('/', express.static('public'))
 
 // Schemas
 const Dish = require('./models/Dish')
+const Restaurant = require('./models/Restaurant')
+const Review = require('./models/Review')
+const User = require('./models/User')
 
 // GET
 app.get('/dishes', (req, res) => {
-    Dish.find((err, dishes) => {
+    console.log('/dishes GET')
+    Dish.find()
+    .populate(['restaurant', 'reviews'])
+    .populate({
+        path: 'reviews',
+        populate: [
+            { path: 'user', model: 'User' },
+            { path: 'dish', model: 'Dish' },
+            { path: 'restaurant', model: 'Restaurant' }
+        ]
+        
+    })
+    .exec((err, results) => {
         if (err) console.log(err)
-        res.json(dishes)
+        res.json(results)
     })
 })

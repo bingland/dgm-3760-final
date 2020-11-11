@@ -8,6 +8,15 @@ const search = (e) => {
     e.preventDefault()
     query = searchBar.value
     console.log(query)
+    getDishes().then(dishes => {
+        console.log(dishes)
+    })
+}
+
+const getDishes = async () => {
+    let response = await fetch('/dishes')
+    let dishes = await response.json()
+    return dishes
 }
 
 // event listeners
