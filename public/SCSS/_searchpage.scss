@@ -1,0 +1,53 @@
+.appGrid {
+    display: grid;
+    grid-template-columns: 300px auto;
+
+    .searchArea {
+        background-color: rgb(192, 192, 192);
+        padding: 10px;
+
+        h1 {
+            font-size: 30px;
+        }
+
+        form {
+            padding: 10px 0;
+        }
+
+        #resultsArea {
+            
+            .dish {
+                background-color: white;
+                border: 1px solid grey;
+                border-radius: 4px;
+                display: inline-block;
+                padding: 5px;
+                cursor: pointer;
+
+                .dishPic img {
+                    max-width: 100px;
+                }
+
+                .dishName {
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+                .restaurantName {
+                    font-weight: 12px;
+                }
+                .dishRating {
+
+                }
+                .dishNumber {
+
+                }
+                .dishPrice {
+
+                }
+            }
+        }
+    }
+    #focusArea {
+
+    }
+}
