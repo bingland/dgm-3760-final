@@ -55,9 +55,13 @@ table {
     background-color: silver;
     padding: 10px; }
     .appGrid .searchArea h1 {
-      font-size: 30px; }
+      font-size: 30px;
+      font-weight: 700; }
     .appGrid .searchArea form {
       padding: 10px 0; }
+      .appGrid .searchArea form input {
+        padding: 10px;
+        font-size: 15px; }
     .appGrid .searchArea #resultsArea .dish {
       background-color: white;
       border: 1px solid grey;
@@ -72,5 +76,24 @@ table {
         font-weight: bold; }
       .appGrid .searchArea #resultsArea .dish .restaurantName {
         font-weight: 12px; }
+  .appGrid #focusArea header {
+    background-color: pink; }
+    .appGrid #focusArea header .focusName {
+      font-size: 70px;
+      font-weight: 700; }
+    .appGrid #focusArea header .focusInfo {
+      display: flex; }
+      .appGrid #focusArea header .focusInfo .focusRestaurant {
+        padding-right: 10px;
+        font-weight: 500;
+        font-size: 25px; }
+      .appGrid #focusArea header .focusInfo .focusRating {
+        padding-right: 10px; }
+      .appGrid #focusArea header .focusInfo .focusReviewCount {
+        padding-right: 10px; }
+  .appGrid #focusArea .focusPhotos img {
+    max-width: 200px; }
+  .appGrid #focusArea .focusReviews {
+    border: 1px solid grey; }
 
 /*# sourceMappingURL=main.css.map */

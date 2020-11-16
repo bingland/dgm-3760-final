@@ -1,6 +1,7 @@
 const searchBar = document.getElementById('searchBar')
 const searchSubmit = document.getElementById('searchSubmit')
 const resultsArea = document.getElementById('resultsArea')
+const focusArea = document.getElementById('focusArea')
 
 // state
 let query = ''
@@ -38,13 +39,39 @@ const listDishes = () => {
     document.querySelectorAll('.dish').forEach(item => {
         item.addEventListener('click', (e) => {
             console.log(item.getAttribute('data-id'))
-            focusDish()
+            focusDish(item.getAttribute('data-id'))
         })
     })
 }
 
-const focusDish = () => {
-    console.log('Selecting dish')
+const focusDish = (id) => {
+    let selectedDish = dishes.find(dish => dish._id === id)
+
+    console.log(selectedDish)
+    focusArea.innerHTML = `
+        <header>
+            <h1 class="focusName">${selectedDish.name}</h1>
+            <div class="focusInfo">
+                <div class="focusRestaurant">${selectedDish.restaurant.name}</div>
+                <div class="focusRating">${calcRating(selectedDish.reviews.map(review => review.rating))} stars</div>
+                <div class="focusReviewCount">${selectedDish.reviews.length} ${selectedDish.reviews.length == 1 ? 'Review' : 'Reviews'}</div>
+            </div>
+        </header>
+        <div class="focusPhotos">${selectedDish.pictures.map(pic => {
+            return `<img src="${pic}" alt="selected dish image">`
+        })}</div>
+        <div class="focusReviews">
+            ${selectedDish.reviews.map(review => {
+                return `
+                    <div class="reviewTitle">${review.title}</div>
+                    <div class="reviewUser">${review.user.username}</div>
+                    <div class="reviewRating">${review.rating} stars</div>
+                    <div class="reviewDate">${review.date}</div>
+                    <div class="reviewBody">${review.body}</div>
+                `
+            })}
+        </div>
+    `
 }
 
 const calcRating = (ratings) => {

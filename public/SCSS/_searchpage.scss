@@ -8,10 +8,16 @@
 
         h1 {
             font-size: 30px;
+            font-weight: 700;
         }
 
         form {
             padding: 10px 0;
+
+            input {
+                padding: 10px;
+                font-size: 15px;
+            }
         }
 
         #resultsArea {
@@ -48,6 +54,34 @@
         }
     }
     #focusArea {
-
+        header {
+            background-color: pink;
+            .focusName {
+                font-size: 70px;
+                font-weight: 700;
+            }
+            .focusInfo {
+                display: flex;
+                .focusRestaurant {
+                    padding-right: 10px;
+                    font-weight: 500;
+                    font-size: 25px;
+                }
+                .focusRating {
+                    padding-right: 10px;
+                }
+                .focusReviewCount {
+                    padding-right: 10px;
+                }
+            }
+        }
+        .focusPhotos {
+            img {
+                max-width: 200px;
+            }
+        }
+        .focusReviews {
+            border: 1px solid grey;
+        }
     }
 }
