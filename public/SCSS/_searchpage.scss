@@ -82,6 +82,37 @@
         }
         .focusReviews {
             border: 1px solid grey;
+
+            .reviewHeader {
+                display: flex;
+                background-color: green;
+
+                .reviewPFP {
+                    background-color: yellow;
+                    max-width: 50px;
+                    img {
+                        width: 100%;
+                        border-radius: 50%;
+                    }
+                }
+                .reviewUser {
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+                .reviewRating {
+                    width: 120px;
+                    background-color: pink;
+                    
+                    svg {
+                        max-width: 100px;
+                    }
+                }
+                
+
+            }
+            .reviewContent {
+
+            }
         }
     }
 }
