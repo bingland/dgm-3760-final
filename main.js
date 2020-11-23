@@ -23,7 +23,9 @@ const Restaurant = require('./models/Restaurant')
 const Review = require('./models/Review')
 const User = require('./models/User')
 
-// GET
+// GET all dishes
+// todo: other dishes at restaurants
+// todo: searching for dishes; return them by exact matches and most relevant
 app.get('/dishes', (req, res) => {
     console.log('/dishes GET')
     Dish.find()
@@ -37,6 +39,39 @@ app.get('/dishes', (req, res) => {
         ]
         
     })
+    .exec((err, results) => {
+        if (err) console.log(err)
+        res.json(results)
+    })
+})
+
+// GET dishes by query
+app.get('/dishes/:query', (req, res) => {
+    console.log('/dishes/:query GET')
+    Dish.find({ name: { $regex: req.params.query, $options: 'i' } }, (err, results) => {
+        if (err) console.log(err)
+    })
+    .populate(['restaurant', 'reviews'])
+    .populate({
+        path: 'reviews',
+        populate: [
+            { path: 'user', model: 'User' },
+            { path: 'dish', model: 'Dish' },
+            { path: 'restaurant', model: 'Restaurant' }
+        ]
+        
+    })
+    .exec((err, results) => {
+        if (err) console.log(err)
+        res.json(results)
+    })
+})
+
+// GET all restaurants
+app.get('/restaurants', (req, res) => {
+    console.log('/restaurants GET')
+    Restaurant.find()
+    .populate(['dishes'])
     .exec((err, results) => {
         if (err) console.log(err)
         res.json(results)

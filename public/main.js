@@ -11,7 +11,7 @@ const search = (e) => {
     e.preventDefault()
     query = searchBar.value
     console.log(query)
-    getAllDishes().then(results => {
+    getAllDishes(query).then(results => {
         console.log(results)
         dishes = results
         listDishes()
@@ -110,8 +110,9 @@ const returnDate = (string) => {
     return output
 }
 
-const getAllDishes = async () => {
-    let response = await fetch('/dishes')
+const getAllDishes = async (query) => {
+    let url = query == '' ? '/dishes' : '/dishes/' + query
+    let response = await fetch(url)
     let dishes = await response.json()
     return dishes
 }
