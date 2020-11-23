@@ -11,7 +11,7 @@ const search = (e) => {
     e.preventDefault()
     query = searchBar.value
     console.log(query)
-    getAllDishes(query).then(results => {
+    getDishes(query).then(results => {
         console.log(results)
         dishes = results
         listDishes()
@@ -61,21 +61,41 @@ const focusDish = (id) => {
         <div class="focusPhotos">${selectedDish.pictures.map(pic => {
             return `<img src="${pic}" alt="selected dish image">`
         })}</div>
-        <div class="focusReviews">
-            ${selectedDish.reviews.map(review => {
-                return `
-                <div class="reviewHeader">
-                    <div class="reviewPFP"><img src="./images/anonProfilePic.png" alt="user profile picture"></img></div>
-                    <div class="reviewUser">${review.user.username}</div>
-                    <div class="reviewRating">${returnStars(review.rating)}</div>
-                    <div class="reviewDate">${returnDate(review.date)}</div>
+        <div class="focusContentGrid">
+            <div class="focusReviews">
+                ${selectedDish.reviews.map(review => {
+                    return `
+                    <div class="focusReview">
+                        <div class="reviewHeader">
+                            <div class="reviewPFP"><img src="./images/anonProfilePic.png" alt="user profile picture"></img></div>
+                            <div class="reviewUser">${review.user.username}</div>
+                            <div class="reviewRating">${returnStars(review.rating)}</div>
+                            <div class="reviewDate">${returnDate(review.date)}</div>
+                        </div>
+                        <div class="reviewContent">
+                            <div class="reviewTitle">${review.title}</div>
+                            <div class="reviewBody">${review.body}</div>
+                        </div>
+                    </div>
+                    `
+                })}
+            </div>
+            <div class="focusRelated">
+                <div class="dishesRestaurant">
+                    <h1>More dishes from ${selectedDish.restaurant.name}</h1>
+                    <div class="restaurantDishes">
+                    ${ getAllRestaurants().then(results => {
+                        results[0].dishes.map(dish => {
+                            // TODO: this outputs to the screen before the promise resolves
+                            console.log(dish.name)
+                            return `
+                                <div class="restaurantDish">${dish.name}</div>
+                            `
+                        })
+                    })}
+                    </div>
                 </div>
-                <div class="reviewContent">
-                    <div class="reviewTitle">${review.title}</div>
-                    <div class="reviewBody">${review.body}</div>
-                </div>
-                `
-            })}
+            </div>
         </div>
     `
 }
@@ -110,11 +130,18 @@ const returnDate = (string) => {
     return output
 }
 
-const getAllDishes = async (query) => {
+const getDishes = async (query) => {
     let url = query == '' ? '/dishes' : '/dishes/' + query
     let response = await fetch(url)
     let dishes = await response.json()
     return dishes
+}
+
+const getAllRestaurants = async (query) => {
+    let url = '/restaurants'
+    let response = await fetch(url)
+    let restaurants = await response.json()
+    return restaurants
 }
 
 // event listeners

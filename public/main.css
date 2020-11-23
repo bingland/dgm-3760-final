@@ -93,24 +93,29 @@ table {
         padding-right: 10px; }
   .appGrid #focusArea .focusPhotos img {
     max-width: 200px; }
-  .appGrid #focusArea .focusReviews {
+  .appGrid #focusArea .focusContentGrid .focusReviews .focusReview {
     border: 1px solid grey; }
-    .appGrid #focusArea .focusReviews .reviewHeader {
+    .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader {
       display: flex;
       background-color: green; }
-      .appGrid #focusArea .focusReviews .reviewHeader .reviewPFP {
+      .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader .reviewPFP {
         background-color: yellow;
         max-width: 50px; }
-        .appGrid #focusArea .focusReviews .reviewHeader .reviewPFP img {
+        .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader .reviewPFP img {
           width: 100%;
           border-radius: 50%; }
-      .appGrid #focusArea .focusReviews .reviewHeader .reviewUser {
+      .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader .reviewUser {
         font-size: 20px;
         font-weight: bold; }
-      .appGrid #focusArea .focusReviews .reviewHeader .reviewRating {
+      .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader .reviewRating {
         width: 120px;
         background-color: pink; }
-        .appGrid #focusArea .focusReviews .reviewHeader .reviewRating svg {
+        .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader .reviewRating svg {
           max-width: 100px; }
+  .appGrid #focusArea .focusContentGrid .focusRelated .dishesRestaurant {
+    background: #ab82ee; }
+    .appGrid #focusArea .focusContentGrid .focusRelated .dishesRestaurant h1 {
+      font-size: 20px;
+      font-weight: bold; }
 
 /*# sourceMappingURL=main.css.map */
