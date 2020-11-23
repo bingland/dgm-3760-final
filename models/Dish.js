@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const DishSchema = new mongoose.Schema({
   name: String, 
+  price: String,
   restaurant: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Restaurant'
@@ -9,7 +10,8 @@ const DishSchema = new mongoose.Schema({
   reviews: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Review'
-  }]
+  }],
+  pictures: [String]
 }, { collection: 'dishes' })
 
 module.exports = mongoose.model('Dish', DishSchema)
