@@ -112,10 +112,15 @@ table {
         background-color: pink; }
         .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader .reviewRating svg {
           max-width: 100px; }
-  .appGrid #focusArea .focusContentGrid .focusRelated .dishesRestaurant {
+  .appGrid #focusArea .focusContentGrid .focusRelated .relatedRestaurant {
     background: #ab82ee; }
-    .appGrid #focusArea .focusContentGrid .focusRelated .dishesRestaurant h1 {
+    .appGrid #focusArea .focusContentGrid .focusRelated .relatedRestaurant h1 {
       font-size: 20px;
       font-weight: bold; }
+    .appGrid #focusArea .focusContentGrid .focusRelated .relatedRestaurant .restaurantDishes .restaurantDish {
+      display: flex;
+      background-color: green; }
+      .appGrid #focusArea .focusContentGrid .focusRelated .relatedRestaurant .restaurantDishes .restaurantDish .dishName {
+        font-size: 20px; }
 
 /*# sourceMappingURL=main.css.map */

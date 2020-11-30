@@ -116,11 +116,22 @@
                 }
             }
             .focusRelated {
-                .dishesRestaurant {
+                .relatedRestaurant {
                     background: rgb(171, 130, 238);
                     h1 { 
                         font-size: 20px; 
                         font-weight: bold;
+                    }
+
+                    .restaurantDishes {
+                        .restaurantDish {
+                            display: flex;
+                            background-color: green;
+
+                            .dishName {
+                                font-size: 20px;
+                            }
+                        }
                     }
                 }
             }

@@ -81,23 +81,28 @@ const focusDish = (id) => {
                 })}
             </div>
             <div class="focusRelated">
-                <div class="dishesRestaurant">
+                <div class="relatedRestaurant">
                     <h1>More dishes from ${selectedDish.restaurant.name}</h1>
-                    <div class="restaurantDishes">
-                    ${ getAllRestaurants().then(results => {
-                        results[0].dishes.map(dish => {
-                            // TODO: this outputs to the screen before the promise resolves
-                            console.log(dish.name)
-                            return `
-                                <div class="restaurantDish">${dish.name}</div>
-                            `
-                        })
-                    })}
-                    </div>
+                    <div class="restaurantDishes"><!-- populated via JS --></div>
                 </div>
             </div>
         </div>
     `
+
+    // get restaurants, populate .restaurantDishes
+    getOneRestaurant(selectedDish.restaurant._id).then(results => {
+        let div = document.querySelector('.restaurantDishes')
+        div.innerHTML = ''
+        console.log(results)
+        results.dishes.forEach(dish => {
+            div.innerHTML += `
+                <div class="restaurantDish">
+                    <div class="dishName">${dish.name}</div>
+                    <div class="dishRating">${returnStars(calcRating(dish.reviews.map(review => review.rating)))}</div>
+                </div>
+            `
+        })
+    })
 }
 
 const calcRating = (ratings) => {
@@ -137,11 +142,18 @@ const getDishes = async (query) => {
     return dishes
 }
 
-const getAllRestaurants = async (query) => {
+const getAllRestaurants = async () => {
     let url = '/restaurants'
     let response = await fetch(url)
     let restaurants = await response.json()
     return restaurants
+}
+
+const getOneRestaurant = async (id) => {
+    let url = '/restaurants/' + id
+    let response = await fetch(url)
+    let restaurant = await response.json()
+    return restaurant
 }
 
 // event listeners
