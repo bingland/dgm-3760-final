@@ -59,7 +59,6 @@ app.get('/dishes/:query', (req, res) => {
             { path: 'dish', model: 'Dish' },
             { path: 'restaurant', model: 'Restaurant' }
         ]
-        
     })
     .exec((err, results) => {
         if (err) console.log(err)
@@ -72,6 +71,25 @@ app.get('/restaurants', (req, res) => {
     console.log('/restaurants GET')
     Restaurant.find()
     .populate(['dishes'])
+    .exec((err, results) => {
+        if (err) console.log(err)
+        res.json(results)
+    })
+})
+
+// GET restaurant by query
+app.get('/restaurants/:id', (req, res) => {
+    console.log('/restaurants GET')
+    Restaurant.findById(`${req.params.id}`, (err, results) => {
+        if (err) console.log(err)
+    })
+    .populate(['dishes'])
+    .populate({
+        path: 'dishes',
+        populate: [
+            { path: 'reviews', model: 'Review' }
+        ]
+    })
     .exec((err, results) => {
         if (err) console.log(err)
         res.json(results)
