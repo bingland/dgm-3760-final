@@ -10,7 +10,7 @@ let dishes = []
 const search = (e) => {
     e.preventDefault()
     query = searchBar.value
-    console.log(query)
+    console.log(`Entered query: ${query}`)
     getDishes(query).then(results => {
         console.log(results)
         dishes = results
@@ -24,11 +24,11 @@ const listDishes = () => {
         resultsArea.innerHTML += `
         <div class="dish" data-id="${dish._id}">
             <div class="dishPic">
-                <img src="${dish.pictures[0]}" alt="dish icon">
+                <img src="${dish.thumbnail}" alt="dish icon">
             </div>
             <div class="dishName">${dish.name}</div>
             <div class="restaurantName">${dish.restaurant.name}</div>
-            <div class="dishRating">${calcRating(dish.reviews.map(review => review.rating))} stars</div>
+            <div class="dishRating">${returnStars(calcRating(dish.reviews.map(review => review.rating)))} stars</div>
             <div class="dishNumber">${dish.reviews.length} ${dish.reviews.length == 1 ? 'Review' : 'Reviews'}</div>
             <div class="dishPrice">${dish.price}</div>
         </div>
@@ -59,10 +59,47 @@ const focusDish = (id) => {
             </div>
         </header>
         <div class="focusPhotos">${selectedDish.pictures.map(pic => {
-            return `<img src="${pic}" alt="selected dish image">`
+            return `<img src="${pic}" alt="selected dish image" />`
         })}</div>
         <div class="focusContentGrid">
+            <div class="focusMeta">
+                <div class="focusItem">
+                    <div class="focusItemCheck">
+                        <!-- Restaurant Delivery -->
+                        ${selectedDish.restaurant.delivery !== true ? `
+                            <svg viewBox="0 0 22.947 17.87">
+                                <path d="M25.947,6.638,11.72,22.87,3,15.2l1.681-1.9,6.809,5.974L24.066,5l1.88,1.638Z" transform="translate(-3 -5)" fill="#519b76" fill-rule="evenodd"/>
+                            </svg>
+                        ` : `
+                            <svg viewBox="0 0 24 24">
+                                <path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z" fill="#D63A46"/>
+                            </svg>
+                        `}
+                    </div>
+                    <div class="focusItemValue">Delivery</div>
+                </div>
+                <div class="focusItem">
+                    <div class="focusItemCheck">
+                        <!-- Drive Thru -->
+                        ${selectedDish.restaurant.drivethru === true ? `
+                            <svg viewBox="0 0 22.947 17.87">
+                                <path d="M25.947,6.638,11.72,22.87,3,15.2l1.681-1.9,6.809,5.974L24.066,5l1.88,1.638Z" transform="translate(-3 -5)" fill="#519b76" fill-rule="evenodd"/>
+                            </svg>
+                        ` : `
+                        <svg viewBox="0 0 24 24">
+                            <path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z" fill="#D63A46"/>
+                        </svg>
+                        `}
+                    </div>
+                    <div class="focusItemValue">Drive Thru</div>
+                </div>
+                <div class="focusMenu">
+                    <div class="menuText"><a href="${selectedDish.restaurant.menu}" target="blank">${selectedDish.restaurant.name} Menu</a></div>
+                </div>
+            </div>
+
             <div class="focusReviews">
+                <h2 class="focusTitle">Reviews</h2>
                 ${selectedDish.reviews.map(review => {
                     return `
                     <div class="focusReview">

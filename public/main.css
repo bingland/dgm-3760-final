@@ -92,7 +92,30 @@ table {
       .appGrid #focusArea header .focusInfo .focusReviewCount {
         padding-right: 10px; }
   .appGrid #focusArea .focusPhotos img {
-    max-width: 200px; }
+    max-width: 200px;
+    max-height: 150px; }
+  .appGrid #focusArea .focusContentGrid .focusMeta {
+    display: flex; }
+    .appGrid #focusArea .focusContentGrid .focusMeta .focusItem {
+      display: flex;
+      margin-right: 10px; }
+      .appGrid #focusArea .focusContentGrid .focusMeta .focusItem .focusItemCheck svg {
+        width: 24px; }
+      .appGrid #focusArea .focusContentGrid .focusMeta .focusItem .focusItemValue {
+        font-size: 20px;
+        font-weight: bold; }
+    .appGrid #focusArea .focusContentGrid .focusMeta .focusMenu {
+      padding: 10px;
+      border: 1px solid black;
+      border-radius: 10px;
+      background-color: lightgoldenrodyellow; }
+      .appGrid #focusArea .focusContentGrid .focusMeta .focusMenu .menuText {
+        font-weight: bold;
+        font-size: 20px;
+        display: inline-block; }
+  .appGrid #focusArea .focusContentGrid .focusReviews .focusTitle {
+    font-size: 40px;
+    font-weight: bold; }
   .appGrid #focusArea .focusContentGrid .focusReviews .focusReview {
     border: 1px solid grey; }
     .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader {

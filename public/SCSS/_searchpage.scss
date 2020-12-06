@@ -78,10 +78,51 @@
         .focusPhotos {
             img {
                 max-width: 200px;
+                max-height: 150px;
             }
         }
+        // Content dividing grid
         .focusContentGrid {
+            .focusMeta {
+                display: flex;
+
+                .focusItem {
+                    display: flex;
+                    margin-right: 10px;
+
+                    .focusItemCheck {
+                        svg {
+                            width: 24px;
+                        }
+                    }
+                    .focusItemValue {
+                        font-size: 20px;
+                        font-weight: bold;
+                    }
+                }
+                .focusMenu {
+                    padding: 10px;
+                    border: 1px solid black;
+                    border-radius: 10px;
+                    background-color: lightgoldenrodyellow;
+
+                    .menuText {
+                        font-weight: bold;
+                        font-size: 20px;
+                        display: inline-block;
+
+                        a {
+
+                        }
+                    }
+                }
+            }
             .focusReviews {
+
+                .focusTitle {
+                    font-size: 40px;
+                    font-weight: bold;
+                }
                 .focusReview {
                     border: 1px solid grey;
 
