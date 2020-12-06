@@ -48,7 +48,12 @@ app.get('/dishes', (req, res) => {
 // GET dishes by query
 app.get('/dishes/:query', (req, res) => {
     console.log('/dishes/:query GET')
-    Dish.find({ name: { $regex: req.params.query, $options: 'i' } }, (err, results) => {
+    Dish.find({
+        '$or': [
+            {name: { $regex: req.params.query, $options: 'i' }},
+            {tags: { $regex: req.params.query, $options: 'i' }}
+        ]
+    }, (err, results) => {
         if (err) console.log(err)
     })
     .populate(['restaurant', 'reviews'])
