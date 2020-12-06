@@ -11,7 +11,9 @@ const DishSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Review'
   }],
-  pictures: [String]
+  pictures: [String],
+  thumbnail: String,
+  tags: [String]
 }, { collection: 'dishes' })
 
 module.exports = mongoose.model('Dish', DishSchema)
