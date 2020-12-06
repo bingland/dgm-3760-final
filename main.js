@@ -17,6 +17,8 @@ app.listen(port, () => { console.log(`Server running on port ${port}`) })
 
 app.use('/', express.static('public'))
 
+mongoose.set('useFindAndModify', false);
+
 // Schemas
 const Dish = require('./models/Dish')
 const Restaurant = require('./models/Restaurant')
@@ -98,5 +100,38 @@ app.get('/restaurants/:id', (req, res) => {
     .exec((err, results) => {
         if (err) console.log(err)
         res.json(results)
+    })
+})
+
+// POST review
+app.post('/reviews', (req, res) => {
+    Review.create({
+        title: req.query.title,
+        body: req.query.body,
+        rating: req.query.rating,
+        date: new Date(), // CURRENT SYSTEM DATE
+        user: req.query.user,
+        dish: req.query.dish,
+        restaurant: req.query.restaurant
+    }, (err, review) => {
+        if (err) console.log(err)
+
+        console.log(review._id)
+
+        Dish.findOneAndUpdate(
+            {_id: review.dish},
+            { $push: {reviews: review._id} },
+            (err, result) => {
+                if (err) console.log(err)
+                console.log(result)
+            }
+        )
+
+        Review.find((err, reviews) => {
+            if (err) console.log(err)
+
+            //console.log(reviews)
+            res.json(true)
+        })
     })
 })

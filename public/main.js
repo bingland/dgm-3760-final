@@ -66,7 +66,7 @@ const focusDish = (id) => {
                 <div class="focusItem">
                     <div class="focusItemCheck">
                         <!-- Restaurant Delivery -->
-                        ${selectedDish.restaurant.delivery !== true ? `
+                        ${selectedDish.restaurant.delivery === true ? `
                             <svg viewBox="0 0 22.947 17.87">
                                 <path d="M25.947,6.638,11.72,22.87,3,15.2l1.681-1.9,6.809,5.974L24.066,5l1.88,1.638Z" transform="translate(-3 -5)" fill="#519b76" fill-rule="evenodd"/>
                             </svg>
