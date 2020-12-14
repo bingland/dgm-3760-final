@@ -150,50 +150,6 @@ const focusDish = (id) => {
         })
     })
 
-    const displaySubmitArea = () => {
-        // submit form HTML
-        let submitAreaContent = document.createElement('div')
-        submitAreaContent.className = 'submit'
-        submitAreaContent.innerHTML = `
-            <div class="submitInfo">
-                <input type="text" placeholder="Enter Review Title">
-                <!-- stars -->
-            </div>
-            <textarea placeholder="Enter your review here..."></textarea>
-            <div class="submitControls">
-                <button class="submitButton">Submit</button>
-                <button class="cancelButton">Cancel</button>
-            </div>
-        `
-
-        // set the submit area content to our div
-        document.querySelector('.reviewSubmitArea').appendChild(submitAreaContent)
-        // remove the new review button
-        document.querySelector('.submitAppear').remove()
-        // add event listener for submit area content button
-        document.querySelector('.submitControls .cancelButton').addEventListener('click', () => {
-            closeSubmitArea()
-        })
-    }
-
-    const closeSubmitArea = () => {
-        // new review button HTML
-        let submitNewReview = document.createElement('div')
-        submitNewReview.className = 'submitAppear'
-        submitNewReview.innerHTML = `
-            <button class="submitAppear">New Review +</button>
-        `
-
-        // remove the submit area content
-        document.querySelector('.submit').remove()
-        // add the new review button
-        document.querySelector('.reviewBar').appendChild(submitNewReview)
-        // add event listener for new review button
-        document.querySelector('.submitAppear').addEventListener('click', () => {
-            displaySubmitArea()
-        })
-    }
-
     // new review button event listener
     document.querySelector('.submitAppear').addEventListener('click', () => {
         displaySubmitArea()
@@ -221,6 +177,100 @@ const returnStars = (rating) => {
         counter -= 1
     }
     return output
+}
+
+const displaySubmitArea = () => {
+    // submit form HTML
+    let submitAreaContent = document.createElement('div')
+    submitAreaContent.className = 'submit'
+    submitAreaContent.innerHTML = `
+        <div class="submitInfo">
+            <input type="text" placeholder="Enter Review Title">
+            <div class="interactiveStars">
+                <!-- insert stars via JS -->
+            </div>
+        </div>
+        <textarea placeholder="Enter your review here..."></textarea>
+        <div class="submitControls">
+            <button class="submitButton">Submit</button>
+            <button class="cancelButton">Cancel</button>
+        </div>
+    `
+
+    // set the submit area content to our div
+    document.querySelector('.reviewSubmitArea').appendChild(submitAreaContent)
+    // remove the new review button
+    document.querySelector('.submitAppear').remove()
+    // add event listener for submit area content button
+    document.querySelector('.submitControls .cancelButton').addEventListener('click', () => {
+        closeSubmitArea()
+    })
+
+    interactiveStars()
+}
+
+const closeSubmitArea = () => {
+    // new review button HTML
+    let submitNewReview = document.createElement('div')
+    submitNewReview.className = 'submitAppear'
+    submitNewReview.innerHTML = `
+        <button class="submitAppear">New Review +</button>
+    `
+
+    // remove the submit area content
+    document.querySelector('.submit').remove()
+    // add the new review button
+    document.querySelector('.reviewBar').appendChild(submitNewReview)
+    // add event listener for new review button
+    document.querySelector('.submitAppear').addEventListener('click', () => {
+        displaySubmitArea()
+    })
+}
+
+const interactiveStars = () => {
+    let starArea = document.querySelector('.interactiveStars')
+    console.log(starArea)
+    
+    starArea.innerHTML = ''
+    for (let i = 0; i < 5; i++) {
+        starArea.innerHTML += `
+            <svg class="ratingStar" data-id="${i + 1}" width="24" height="24" viewBox="0 0 24 24"><path data-id="${i + 1}" d="M12 5.173l2.335 4.817 5.305.732-3.861 3.71.942 5.27-4.721-2.524-4.721 2.525.942-5.27-3.861-3.71 5.305-.733 2.335-4.817zm0-4.586l-3.668 7.568-8.332 1.151 6.064 5.828-1.48 8.279 7.416-3.967 7.416 3.966-1.48-8.279 6.064-5.827-8.332-1.15-3.668-7.569z"/></svg>
+        `
+    }
+    document.querySelectorAll('.ratingStar').forEach(star => {
+        star.addEventListener('click', (e) => {
+            starArea.innerHTML = ''
+            starClick(e)
+        })
+    })
+}
+
+const starClick = (e) => {
+    let output = ''
+    let starArea = document.querySelector('.interactiveStars')
+    let rating = e.target.getAttribute('data-id')
+    for (let i = 0; i < 5; i++) {
+        if(i < rating) {
+            output += `
+                <svg class="ratingStar" data-id="${i + 1}" width="24" height="24" viewBox="0 0 24 24"><path data-id="${i + 1}" d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+            `
+        } else {
+            output += `
+                <svg class="ratingStar" data-id="${i + 1}" width="24" height="24" viewBox="0 0 24 24"><path data-id="${i + 1}" d="M12 5.173l2.335 4.817 5.305.732-3.861 3.71.942 5.27-4.721-2.524-4.721 2.525.942-5.27-3.861-3.71 5.305-.733 2.335-4.817zm0-4.586l-3.668 7.568-8.332 1.151 6.064 5.828-1.48 8.279 7.416-3.967 7.416 3.966-1.48-8.279 6.064-5.827-8.332-1.15-3.668-7.569z"/></svg>
+            `
+        }
+    }
+
+    starArea.innerHTML = output
+
+    document.querySelectorAll('.ratingStar').forEach(star => {
+        star.addEventListener('click', (e) => {
+            starArea.innerHTML = ''
+            starClick(e)
+        })
+    })
+    
+    console.log(e.target.getAttribute('data-id'))
 }
 
 const returnDate = (string) => {
