@@ -46,7 +46,15 @@ table {
   border-spacing: 0; }
 
 *, html, body {
-  font-family: 'Raleway', sans-serif; }
+  font-family: 'Raleway', sans-serif;
+  outline: none; }
+
+button {
+  font-size: 16px;
+  border-radius: 10px;
+  padding: 10px 10px;
+  border: none;
+  background-color: lightgrey; }
 
 .appGrid {
   display: grid;
@@ -113,9 +121,32 @@ table {
         font-weight: bold;
         font-size: 20px;
         display: inline-block; }
-  .appGrid #focusArea .focusContentGrid .focusReviews .focusTitle {
-    font-size: 40px;
-    font-weight: bold; }
+  .appGrid #focusArea .focusContentGrid .focusReviews .reviewBar {
+    display: flex; }
+    .appGrid #focusArea .focusContentGrid .focusReviews .reviewBar .focusTitle {
+      font-size: 40px;
+      font-weight: bold;
+      margin-right: 20px; }
+    .appGrid #focusArea .focusContentGrid .focusReviews .reviewBar .submitAppear {
+      background-color: lightgray;
+      border-radius: 10px; }
+  .appGrid #focusArea .focusContentGrid .focusReviews .reviewSubmitArea .submit .submitInfo input[type=text] {
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    padding: 10px; }
+  .appGrid #focusArea .focusContentGrid .focusReviews .reviewSubmitArea .submit textarea {
+    width: 500px;
+    height: 150px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    box-shadow: 4px 3px 19px 1px rgba(0, 0, 0, 0.15); }
+  .appGrid #focusArea .focusContentGrid .focusReviews .reviewSubmitArea .submit .submitControls .submitButton, .appGrid #focusArea .focusContentGrid .focusReviews .reviewSubmitArea .submit .submitControls .cancelButton {
+    cursor: pointer; }
+  .appGrid #focusArea .focusContentGrid .focusReviews .reviewSubmitArea .submit .submitControls .submitButton {
+    background-color: grey; }
   .appGrid #focusArea .focusContentGrid .focusReviews .focusReview {
     border: 1px solid grey; }
     .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader {

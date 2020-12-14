@@ -99,7 +99,16 @@ const focusDish = (id) => {
             </div>
 
             <div class="focusReviews">
-                <h2 class="focusTitle">Reviews</h2>
+                <div class="reviewBar">
+                    <h2 class="focusTitle">Reviews</h2>
+                    <button class="submitAppear">New Review +</button>
+                </div>
+
+                <!-- Submit Review -->
+                <div class="reviewSubmitArea">
+                    
+                </div>
+
                 ${selectedDish.reviews.map(review => {
                     return `
                     <div class="focusReview">
@@ -139,6 +148,55 @@ const focusDish = (id) => {
                 </div>
             `
         })
+    })
+
+    const displaySubmitArea = () => {
+        // submit form HTML
+        let submitAreaContent = document.createElement('div')
+        submitAreaContent.className = 'submit'
+        submitAreaContent.innerHTML = `
+            <div class="submitInfo">
+                <input type="text" placeholder="Enter Review Title">
+                <!-- stars -->
+            </div>
+            <textarea placeholder="Enter your review here..."></textarea>
+            <div class="submitControls">
+                <button class="submitButton">Submit</button>
+                <button class="cancelButton">Cancel</button>
+            </div>
+        `
+
+        // set the submit area content to our div
+        document.querySelector('.reviewSubmitArea').appendChild(submitAreaContent)
+        // remove the new review button
+        document.querySelector('.submitAppear').remove()
+        // add event listener for submit area content button
+        document.querySelector('.submitControls .cancelButton').addEventListener('click', () => {
+            closeSubmitArea()
+        })
+    }
+
+    const closeSubmitArea = () => {
+        // new review button HTML
+        let submitNewReview = document.createElement('div')
+        submitNewReview.className = 'submitAppear'
+        submitNewReview.innerHTML = `
+            <button class="submitAppear">New Review +</button>
+        `
+
+        // remove the submit area content
+        document.querySelector('.submit').remove()
+        // add the new review button
+        document.querySelector('.reviewBar').appendChild(submitNewReview)
+        // add event listener for new review button
+        document.querySelector('.submitAppear').addEventListener('click', () => {
+            displaySubmitArea()
+        })
+    }
+
+    // new review button event listener
+    document.querySelector('.submitAppear').addEventListener('click', () => {
+        displaySubmitArea()
     })
 }
 

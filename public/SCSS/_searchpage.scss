@@ -119,9 +119,52 @@
             }
             .focusReviews {
 
-                .focusTitle {
-                    font-size: 40px;
-                    font-weight: bold;
+                .reviewBar {
+                    display: flex;
+
+                    .focusTitle {
+                        font-size: 40px;
+                        font-weight: bold;
+                        margin-right: 20px;
+                    }
+                    .submitAppear {
+                        background-color: lightgray;
+                        border-radius: 10px;
+                    }
+                }
+                // REVIEW SUBMIT AREA
+                .reviewSubmitArea {
+                    .submit {
+                        .submitInfo {
+                            input[type=text] {
+                                font-size: 20px;
+                                font-weight: bold;
+                                border: none;
+                                padding: 10px;
+                            }
+                        }
+                        textarea {
+                            width: 500px;
+                            height: 150px;
+                            font-size: 16px;
+                            border-radius: 10px;
+                            border: none;
+                            padding: 10px;
+                            box-shadow: 4px 3px 19px 1px rgba(0,0,0,0.15);
+                        }
+                        .submitControls {
+                            .submitButton, .cancelButton {
+                                cursor: pointer;
+                            }
+
+                            .submitButton {
+                                background-color: grey;
+                            }
+                            .cancelButton {
+                                
+                            }
+                        }
+                    }
                 }
                 .focusReview {
                     border: 1px solid grey;
