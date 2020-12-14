@@ -105,6 +105,7 @@ app.get('/restaurants/:id', (req, res) => {
 
 // POST review
 app.post('/reviews', (req, res) => {
+    console.log('/reviews POST')
     Review.create({
         title: req.query.title,
         body: req.query.body,

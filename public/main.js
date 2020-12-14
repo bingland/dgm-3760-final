@@ -6,6 +6,8 @@ const focusArea = document.getElementById('focusArea')
 // state
 let query = ''
 let dishes = []
+let selectedDish = undefined
+let userRating = undefined
 
 const search = (e) => {
     e.preventDefault()
@@ -45,7 +47,7 @@ const listDishes = () => {
 }
 
 const focusDish = (id) => {
-    let selectedDish = dishes.find(dish => dish._id === id)
+    selectedDish = dishes.find(dish => dish._id === id)
 
     console.log(selectedDish)
     focusArea.innerHTML = `
@@ -185,12 +187,12 @@ const displaySubmitArea = () => {
     submitAreaContent.className = 'submit'
     submitAreaContent.innerHTML = `
         <div class="submitInfo">
-            <input type="text" placeholder="Enter Review Title">
+            <input class="submitTitle" type="text" placeholder="Enter Review Title">
             <div class="interactiveStars">
                 <!-- insert stars via JS -->
             </div>
         </div>
-        <textarea placeholder="Enter your review here..."></textarea>
+        <textarea class="submitBody" placeholder="Enter your review here..."></textarea>
         <div class="submitControls">
             <button class="submitButton">Submit</button>
             <button class="cancelButton">Cancel</button>
@@ -201,9 +203,13 @@ const displaySubmitArea = () => {
     document.querySelector('.reviewSubmitArea').appendChild(submitAreaContent)
     // remove the new review button
     document.querySelector('.submitAppear').remove()
-    // add event listener for submit area content button
+    // add event listener for submit area content cancel button
     document.querySelector('.submitControls .cancelButton').addEventListener('click', () => {
         closeSubmitArea()
+    })
+    // add event listener for submitting review
+    document.querySelector('.submitButton').addEventListener('click', () => {
+        postReview()
     })
 
     interactiveStars()
@@ -248,9 +254,9 @@ const interactiveStars = () => {
 const starClick = (e) => {
     let output = ''
     let starArea = document.querySelector('.interactiveStars')
-    let rating = e.target.getAttribute('data-id')
+    userRating = e.target.getAttribute('data-id')
     for (let i = 0; i < 5; i++) {
-        if(i < rating) {
+        if(i < userRating) {
             output += `
                 <svg class="ratingStar" data-id="${i + 1}" width="24" height="24" viewBox="0 0 24 24"><path data-id="${i + 1}" d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
             `
@@ -299,6 +305,19 @@ const getOneRestaurant = async (id) => {
     let response = await fetch(url)
     let restaurant = await response.json()
     return restaurant
+}
+
+const postReview = async () => {
+    // example url: localhost:3000/reviews?title=Test Review&body=Wow cool amazing dish omg&rating=4&user=5fa8d7bc6847f97e01a38c38&dish=5fa8d2be6847f97e01a38c35&restaurant=5fa8d36f6847f97e01a38c36
+    let title = document.querySelector('.submitTitle').value
+    let body = document.querySelector('.submitBody').value
+    let url = `/reviews?title=${title}&body=${body}&rating=${userRating}&user=5fa8d7bc6847f97e01a38c38&dish=${selectedDish._id}&restaurant=${selectedDish.restaurant._id}`
+    console.log(url)
+    let response = await fetch(url, {
+        method: 'POST'
+    })
+    let success = await response
+    console.log(success)
 }
 
 // event listeners
