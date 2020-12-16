@@ -147,24 +147,24 @@ button {
     cursor: pointer; }
   .appGrid #focusArea .focusContentGrid .focusReviews .reviewSubmitArea .submit .submitControls .submitButton {
     background-color: grey; }
-  .appGrid #focusArea .focusContentGrid .focusReviews .focusReview {
+  .appGrid #focusArea .focusContentGrid .focusReviews .reviews .focusReview {
     border: 1px solid grey; }
-    .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader {
+    .appGrid #focusArea .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader {
       display: flex;
       background-color: green; }
-      .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader .reviewPFP {
+      .appGrid #focusArea .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewPFP {
         background-color: yellow;
         max-width: 50px; }
-        .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader .reviewPFP img {
+        .appGrid #focusArea .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewPFP img {
           width: 100%;
           border-radius: 50%; }
-      .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader .reviewUser {
+      .appGrid #focusArea .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewUser {
         font-size: 20px;
         font-weight: bold; }
-      .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader .reviewRating {
+      .appGrid #focusArea .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewRating {
         width: 120px;
         background-color: pink; }
-        .appGrid #focusArea .focusContentGrid .focusReviews .focusReview .reviewHeader .reviewRating svg {
+        .appGrid #focusArea .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewRating svg {
           max-width: 100px; }
   .appGrid #focusArea .focusContentGrid .focusRelated .relatedRestaurant {
     background: #ab82ee; }

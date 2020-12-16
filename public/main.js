@@ -110,7 +110,7 @@ const focusDish = (id) => {
                 <div class="reviewSubmitArea">
                     
                 </div>
-
+                <div class="reviews">
                 ${selectedDish.reviews.map(review => {
                     return `
                     <div class="focusReview">
@@ -127,6 +127,7 @@ const focusDish = (id) => {
                     </div>
                     `
                 })}
+                </div>
             </div>
             <div class="focusRelated">
                 <div class="relatedRestaurant">
@@ -233,6 +234,29 @@ const closeSubmitArea = () => {
     })
 }
 
+const getReviews = () => {
+    let outputArea = document.querySelector('.reviews')
+    let output = ''
+
+    selectedDish.reviews.forEach(review => {
+        output += `
+        <div class="focusReview">
+            <div class="reviewHeader">
+                <div class="reviewPFP"><img src="./images/anonProfilePic.png" alt="user profile picture"></img></div>
+                <div class="reviewUser">${review.user.username}</div>
+                <div class="reviewRating">${returnStars(review.rating)}</div>
+                <div class="reviewDate">${returnDate(review.date)}</div>
+            </div>
+            <div class="reviewContent">
+                <div class="reviewTitle">${review.title}</div>
+                <div class="reviewBody">${review.body}</div>
+            </div>
+        </div>
+        `
+    })
+    outputArea.innerHTML = output
+}
+
 const interactiveStars = () => {
     let starArea = document.querySelector('.interactiveStars')
     console.log(starArea)
@@ -293,6 +317,17 @@ const getDishes = async (query) => {
     return dishes
 }
 
+// const updateSelectedDish = async () => {
+//     let url = `/dish/` + selectedDish._id
+//     let response = await fetch(url)
+//     console.log(response)
+//     let object = await response.json()
+//     object.then(dish => {
+//         selectedDish = dish
+//         console.log(dish)
+//     })
+// }
+
 const getAllRestaurants = async () => {
     let url = '/restaurants'
     let response = await fetch(url)
@@ -313,11 +348,16 @@ const postReview = async () => {
     let body = document.querySelector('.submitBody').value
     let url = `/reviews?title=${title}&body=${body}&rating=${userRating}&user=5fa8d7bc6847f97e01a38c38&dish=${selectedDish._id}&restaurant=${selectedDish.restaurant._id}`
     console.log(url)
-    let response = await fetch(url, {
-        method: 'POST'
-    })
-    let success = await response
-    console.log(success)
+    const func = async () => {
+        let response = await fetch(url, {
+            method: 'POST'
+        })
+        let dish = await response.json()
+        return dish
+    }
+    selectedDish = await func()
+    getReviews()
+    closeSubmitArea()
 }
 
 // event listeners

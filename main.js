@@ -73,6 +73,19 @@ app.get('/dishes/:query', (req, res) => {
     })
 })
 
+// GET dish by id
+app.get('/dish/:id', (req, res) => {
+    console.log('/dish/:id GET')
+    Dish.findById(`${req.params.id}`, (err, results) => {
+        if (err) console.log(err)
+    })
+    .populate('reviews')
+    .exec((err, results) => {
+        if (err) console.log(err)
+        res.json(results)
+    })
+})
+
 // GET all restaurants
 app.get('/restaurants', (req, res) => {
     console.log('/restaurants GET')
@@ -117,22 +130,25 @@ app.post('/reviews', (req, res) => {
     }, (err, review) => {
         if (err) console.log(err)
 
-        console.log(review._id)
-
         Dish.findOneAndUpdate(
             {_id: review.dish},
             { $push: {reviews: review._id} },
             (err, result) => {
                 if (err) console.log(err)
-                console.log(result)
             }
         )
-
-        Review.find((err, reviews) => {
+        .populate(['restaurant', 'reviews'])
+        .populate({
+            path: 'reviews',
+            populate: [
+                { path: 'user', model: 'User' },
+                { path: 'dish', model: 'Dish' },
+                { path: 'restaurant', model: 'Restaurant' }
+            ]
+        })
+        .exec((err, results) => {
             if (err) console.log(err)
-
-            //console.log(reviews)
-            res.json(true)
+            res.json(results)
         })
     })
 })
