@@ -152,3 +152,69 @@ app.post('/reviews', (req, res) => {
         })
     })
 })
+
+// PUT review
+app.put('/reviews/:id', (req, res) => {
+    console.log('/reviews PUT')
+
+    Review.findById(`${req.params.id}`, (err, review) => {
+        if (err) console.log(err)
+        
+        review.title = req.query.title
+        review.body = req.query.body
+        review.rating = req.query.rating
+
+        review.updateOne(review, (err, rev) => {
+            if (err) console.log(err)
+            console.log(review)
+
+            Dish.findById(`${review.dish}`, (err, results) => {
+                if (err) console.log(err)
+            })
+            .populate('reviews')
+            .exec((err, results) => {
+                if (err) console.log(err)
+                res.json(results)
+            })
+        })
+    })
+})
+
+// DELETE review
+app.delete('/reviews/:id', (req, res) => {
+    console.log('/reviews/:id DELETE')
+
+    let reviewId = req.params.id
+    let dishId = undefined
+
+    Review.findById({
+        _id: reviewId
+    }, (err, review) => {
+        if (err) console.log(err)
+
+        // remove redundant ObjectID from Dish
+        console.log(reviewId)
+        //console.log(review)
+
+        dishId = review.dish
+        console.log(dishId)
+
+        Review.deleteOne({
+            _id: reviewId
+        }, (err, reviews) => {
+            if (err) console.log(err)
+    
+            //return the dish of the review as the JSON
+            console.log(dishId)
+            Dish.findById(`${dishId}`, (err, results) => {
+                if (err) console.log(err)
+                console.log(results)
+            })
+            .populate('reviews')
+            .exec((err, results) => {
+                if (err) console.log(err)
+                res.json(results)
+            })
+        })
+    })
+})
