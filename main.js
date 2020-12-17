@@ -130,9 +130,10 @@ app.post('/reviews', (req, res) => {
     }, (err, review) => {
         if (err) console.log(err)
 
+        // add an ObjectID to a reviews respective dish
         Dish.findOneAndUpdate(
             {_id: review.dish},
-            { $push: {reviews: review._id} },
+            { $addToSet: {reviews: review._id} },
             (err, result) => {
                 if (err) console.log(err)
             }
@@ -192,17 +193,25 @@ app.delete('/reviews/:id', (req, res) => {
     }, (err, review) => {
         if (err) console.log(err)
 
-        // remove redundant ObjectID from Dish
         console.log(reviewId)
-        //console.log(review)
 
         dishId = review.dish
         console.log(dishId)
 
+        // delete the review
         Review.deleteOne({
             _id: reviewId
         }, (err, reviews) => {
             if (err) console.log(err)
+
+            // remove redundant ObjectID from Dish
+            Dish.findOneAndUpdate(
+                {_id: dishId},
+                { $pull: {reviews: reviewId} },
+                (err, result) => {
+                    if (err) console.log(err)
+                }
+            )
     
             //return the dish of the review as the JSON
             console.log(dishId)
