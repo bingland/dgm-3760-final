@@ -249,7 +249,7 @@ const getReviews = () => {
                             <div class="reviewDate">${returnDate(review.date)}</div>
                         </div>
                     </div>
-                    <div class="editBtn">Edit</div>
+                    <div class="editBtn" id="edit${index}">Edit</div>
                 </div>
                 <div class="reviewContent">
                     <div class="reviewTitle">${review.title}</div>
@@ -274,8 +274,8 @@ const getReviews = () => {
 const openEditBox = (e) => {
     // toggle a reviews edit mode
     let index = Number(e.target.parentElement.parentElement.getAttribute('index'))
-    console.log(index)
     let selected = selectedDish.reviews[index]
+    console.log(e.target)
     e.target.parentElement.parentElement.innerHTML = `
     <div class="edit">
         <div class="editInfo">
@@ -310,7 +310,6 @@ const openEditBox = (e) => {
 //close edit box
 const closeEditBox = (index) => {
     let review = selectedDish.reviews[index]
-    console.log(`Index: ${index}`)
     document.querySelector(`#review${index}`).innerHTML = `
         <div class="reviewHeader">
             <div class="reviewPFP"><img src="./images/anonProfilePic.png" alt="user profile picture"></img></div>
@@ -321,7 +320,7 @@ const closeEditBox = (index) => {
                     <div class="reviewDate">${returnDate(review.date)}</div>
                 </div>
             </div>
-            <div class="editBtn">Edit</div>
+            <div class="editBtn" id="edit${index}">Edit</div>
         </div>
         <div class="reviewContent">
             <div class="reviewTitle">${review.title}</div>
@@ -330,7 +329,8 @@ const closeEditBox = (index) => {
     `
 
     // assign edit button event listeners
-    let editBtn = document.querySelector(`.editBtn`)
+    let editBtn = document.querySelector(`#edit${index}`)
+    console.log(editBtn)
 
     editBtn.addEventListener('click', (e) => {
         openEditBox(e)
