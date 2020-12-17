@@ -30,7 +30,7 @@ const listDishes = () => {
             </div>
             <div class="dishName">${dish.name}</div>
             <div class="restaurantName">${dish.restaurant.name}</div>
-            <div class="dishRating">${returnStars(calcRating(dish.reviews.map(review => review.rating)))} stars</div>
+            <div class="dishRating">${returnStars(calcRating(dish.reviews.map(review => review.rating)))}</div>
             <div class="dishNumber">${dish.reviews.length} ${dish.reviews.length == 1 ? 'Review' : 'Reviews'}</div>
             <div class="dishPrice">${dish.price}</div>
         </div>
@@ -55,7 +55,7 @@ const focusDish = (id) => {
             <h1 class="focusName">${selectedDish.name}</h1>
             <div class="focusInfo">
                 <div class="focusRestaurant">${selectedDish.restaurant.name}</div>
-                <div class="focusRating">${returnStars(calcRating(selectedDish.reviews.map(review => review.rating)))} stars</div>
+                <div class="focusRating">${returnStars(calcRating(selectedDish.reviews.map(review => review.rating)))}</div>
                 <div class="focusReviewCount">${selectedDish.reviews.length} ${selectedDish.reviews.length == 1 ? 'Review' : 'Reviews'}</div>
                 <div class="focusPrice">${selectedDish.price}</div>
             </div>
@@ -63,7 +63,7 @@ const focusDish = (id) => {
         <div class="focusPhotos">${selectedDish.pictures.map(pic => {
             return `<img src="${pic}" alt="selected dish image" />`
         })}</div>
-        <div class="focusContentGrid">
+        <div class="focusContent">
             <div class="focusMeta">
                 <div class="focusItem">
                     <div class="focusItemCheck">
@@ -100,40 +100,48 @@ const focusDish = (id) => {
                 </div>
             </div>
 
-            <div class="focusReviews">
-                <div class="reviewBar">
-                    <h2 class="focusTitle">Reviews</h2>
-                    <button class="submitAppear">New Review +</button>
+            <div class="focusContentGrid">
+            
+                <div class="focusReviews">
+                    <div class="reviewBar">
+                        <h2 class="focusTitle">Reviews</h2>
+                        <button class="submitAppear">New Review +</button>
+                    </div>
+
+                    <!-- Submit Review -->
+                    <div class="reviewSubmitArea">
+                        
+                    </div>
+                    <div class="reviews">
+                    ${selectedDish.reviews.map(review => {
+                        return `
+                        <div class="focusReview">
+                            <div class="reviewHeader">
+                                <div class="reviewPFP"><img src="./images/anonProfilePic.png" alt="user profile picture"></img></div>
+                                <div class="reviewHeaderText">
+                                    <div class="reviewUser">${review.user.username}</div>
+                                    <div class="row2">
+                                        <div class="reviewRating">${returnStars(review.rating)}</div>
+                                        <div class="reviewDate">${returnDate(review.date)}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="reviewContent">
+                                <div class="reviewTitle">${review.title}</div>
+                                <div class="reviewBody">${review.body}</div>
+                            </div>
+                        </div>
+                        `
+                    })}
+                    </div>
+                </div>
+                <div class="focusRelated">
+                    <div class="relatedRestaurant">
+                        <h1>More dishes from ${selectedDish.restaurant.name}</h1>
+                        <div class="restaurantDishes"><!-- populated via JS --></div>
+                    </div>
                 </div>
 
-                <!-- Submit Review -->
-                <div class="reviewSubmitArea">
-                    
-                </div>
-                <div class="reviews">
-                ${selectedDish.reviews.map(review => {
-                    return `
-                    <div class="focusReview">
-                        <div class="reviewHeader">
-                            <div class="reviewPFP"><img src="./images/anonProfilePic.png" alt="user profile picture"></img></div>
-                            <div class="reviewUser">${review.user.username}</div>
-                            <div class="reviewRating">${returnStars(review.rating)}</div>
-                            <div class="reviewDate">${returnDate(review.date)}</div>
-                        </div>
-                        <div class="reviewContent">
-                            <div class="reviewTitle">${review.title}</div>
-                            <div class="reviewBody">${review.body}</div>
-                        </div>
-                    </div>
-                    `
-                })}
-                </div>
-            </div>
-            <div class="focusRelated">
-                <div class="relatedRestaurant">
-                    <h1>More dishes from ${selectedDish.restaurant.name}</h1>
-                    <div class="restaurantDishes"><!-- populated via JS --></div>
-                </div>
             </div>
         </div>
     `
@@ -146,8 +154,11 @@ const focusDish = (id) => {
         results.dishes.forEach(dish => {
             div.innerHTML += `
                 <div class="restaurantDish">
-                    <div class="dishName">${dish.name}</div>
-                    <div class="dishRating">${returnStars(calcRating(dish.reviews.map(review => review.rating)))}</div>
+                    <div class="dishThumb"><img src="${dish.thumbnail}" alt="${dish.name}" /></div>
+                    <div class="row2">
+                        <div class="dishName">${dish.name}</div>
+                        <div class="dishRating">${returnStars(calcRating(dish.reviews.map(review => review.rating)))} ${dish.price}</div>
+                    </div>
                 </div>
             `
         })

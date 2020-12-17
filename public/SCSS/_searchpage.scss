@@ -30,8 +30,13 @@
                 padding: 5px;
                 cursor: pointer;
 
-                .dishPic img {
-                    max-width: 100px;
+                .dishPic {
+                    max-width: 70px;
+                
+                    img {
+                        width: 100%;
+                        border-radius: 10px;
+                    }
                 }
 
                 .dishName {
@@ -54,14 +59,17 @@
         }
     }
     #focusArea {
+        padding: 20px;
         header {
-            background-color: pink;
+
             .focusName {
                 font-size: 70px;
                 font-weight: 700;
             }
             .focusInfo {
                 display: flex;
+                padding: 20px 0;
+
                 .focusRestaurant {
                     padding-right: 10px;
                     font-weight: 500;
@@ -82,9 +90,10 @@
             }
         }
         // Content dividing grid
-        .focusContentGrid {
+        .focusContent {
             .focusMeta {
                 display: flex;
+                padding: 20px 0;
 
                 .focusItem {
                     display: flex;
@@ -117,105 +126,155 @@
                     }
                 }
             }
-            .focusReviews {
 
-                .reviewBar {
-                    display: flex;
+            // FOCUS CONTENT GRID
+            .focusContentGrid {
+                display: grid; 
+                grid-template-columns: auto 500px;
+                grid-gap: 20px;
 
-                    .focusTitle {
-                        font-size: 40px;
-                        font-weight: bold;
-                        margin-right: 20px;
+                .focusReviews {
+
+                    .reviewBar {
+                        display: flex;
+                        margin-bottom: 10px;
+
+                        .focusTitle {
+                            font-size: 40px;
+                            font-weight: bold;
+                            margin-right: 20px;
+                        }
+                        .submitAppear {
+                            background-color: lightgray;
+                            border-radius: 10px;
+                        }
                     }
-                    .submitAppear {
-                        background-color: lightgray;
-                        border-radius: 10px;
-                    }
-                }
-                // REVIEW SUBMIT AREA
-                .reviewSubmitArea {
-                    .submit {
-                        .submitInfo {
-                            input[type=text] {
-                                font-size: 20px;
-                                font-weight: bold;
+                    // REVIEW SUBMIT AREA
+                    .reviewSubmitArea {
+                        .submit {
+                            .submitInfo {
+                                input[type=text] {
+                                    font-size: 20px;
+                                    font-weight: bold;
+                                    border: none;
+                                    padding: 10px;
+                                }
+                            }
+                            textarea {
+                                width: 500px;
+                                height: 150px;
+                                font-size: 16px;
+                                border-radius: 10px;
                                 border: none;
                                 padding: 10px;
+                                box-shadow: 4px 3px 19px 1px rgba(0,0,0,0.15);
                             }
-                        }
-                        textarea {
-                            width: 500px;
-                            height: 150px;
-                            font-size: 16px;
-                            border-radius: 10px;
-                            border: none;
-                            padding: 10px;
-                            box-shadow: 4px 3px 19px 1px rgba(0,0,0,0.15);
-                        }
-                        .submitControls {
-                            .submitButton, .cancelButton {
-                                cursor: pointer;
-                            }
+                            .submitControls {
+                                .submitButton, .cancelButton {
+                                    cursor: pointer;
+                                }
 
-                            .submitButton {
-                                background-color: grey;
+                                .submitButton {
+                                    background-color: grey;
+                                }
+                                .cancelButton {
+                                    
+                                }
                             }
-                            .cancelButton {
-                                
+                        }
+                    }
+                    .reviews {
+                        .focusReview {
+                            //border: 1px solid grey;
+
+                            .reviewHeader {
+                                display: flex;
+
+                                .reviewPFP {
+                                    max-width: 45px;
+                                    margin-right: 10px;
+
+                                    img {
+                                        width: 100%;
+                                        border-radius: 50%;
+                                    }
+                                }
+                                .reviewHeaderText {
+                                    display: grid;
+                                    grid-template-columns: 1fr;
+
+                                    .reviewUser {
+                                        font-size: 20px;
+                                        font-weight: bold;
+                                        margin-bottom: 5px;
+                                    }
+
+                                    .row2 {
+                                        display: flex;
+
+                                        .reviewRating {
+                                            width: 120px;
+                                            //background-color: pink;
+                                            
+                                            svg {
+                                                max-width: 100px;
+                                            }
+                                        }
+                                        .reviewDate {
+                                            font-size: 15px;
+                                        }
+                                    }
+                                }
+                            }
+                            .reviewContent {
+                                padding: 5px;
+
+                                .reviewTitle {
+                                    font-weight: bold;
+                                    margin-bottom: 5px;
+                                    font-size: 20px;
+                                }
+                                .reviewBody {
+                                    font-size: 18px;
+                                }
                             }
                         }
                     }
                 }
-                .reviews {
-                    .focusReview {
-                        border: 1px solid grey;
 
-                        .reviewHeader {
-                            display: flex;
-                            background-color: green;
+                // RELATED DISHES AREA
+                .focusRelated {
+                    .relatedRestaurant {
+                        background-color: white;
+                        border-radius: 5px;
+                        padding: 10px;
+                        //box-shadow: 3px 3px 12px 0px rgba(0,0,0,0.24);
 
-                            .reviewPFP {
-                                background-color: yellow;
-                                max-width: 50px;
-                                img {
-                                    width: 100%;
-                                    border-radius: 50%;
-                                }
-                            }
-                            .reviewUser {
-                                font-size: 20px;
-                                font-weight: bold;
-                            }
-                            .reviewRating {
-                                width: 120px;
-                                background-color: pink;
-                                
-                                svg {
-                                    max-width: 100px;
-                                }
-                            }
+                        h1 { 
+                            font-size: 20px; 
+                            font-weight: bold;
+                            padding-bottom: 10px;
                         }
-                        .reviewContent {
 
-                        }
-                    }
-                }
-            }
-            .focusRelated {
-                .relatedRestaurant {
-                    background: rgb(171, 130, 238);
-                    h1 { 
-                        font-size: 20px; 
-                        font-weight: bold;
-                    }
+                        .restaurantDishes {
+                            .restaurantDish {
+                                display: flex;
 
-                    .restaurantDishes {
-                        .restaurantDish {
-                            display: flex;
-                            background-color: green;
+                                .dishThumb {
+                                    max-width: 75px;
 
-                            .dishName {
-                                font-size: 20px;
+                                    img {
+                                        width: 100%;
+                                        border-radius: 10px;
+                                    }
+                                }
+                                .row2 {
+                                    display: grid;
+
+                                    .dishName {
+                                        font-size: 20px;
+                                    }
+                                }
                             }
                         }
                     }
