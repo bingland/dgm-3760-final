@@ -111,9 +111,8 @@
                 }
                 .focusMenu {
                     padding: 10px;
-                    border: 1px solid black;
                     border-radius: 10px;
-                    background-color: lightgoldenrodyellow;
+                    background-color: rgb(197, 197, 197);
 
                     .menuText {
                         font-weight: bold;
@@ -121,7 +120,8 @@
                         display: inline-block;
 
                         a {
-
+                            text-decoration: none;
+                            color: black;
                         }
                     }
                 }
@@ -184,8 +184,10 @@
                         }
                     }
                     .reviews {
+                        margin-top: 20px;
+
                         .focusReview {
-                            //border: 1px solid grey;
+                            margin-bottom: 20px;
 
                             .reviewHeader {
                                 display: flex;

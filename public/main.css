@@ -119,13 +119,15 @@ button {
           font-weight: bold; }
       .appGrid #focusArea .focusContent .focusMeta .focusMenu {
         padding: 10px;
-        border: 1px solid black;
         border-radius: 10px;
-        background-color: lightgoldenrodyellow; }
+        background-color: #c5c5c5; }
         .appGrid #focusArea .focusContent .focusMeta .focusMenu .menuText {
           font-weight: bold;
           font-size: 20px;
           display: inline-block; }
+          .appGrid #focusArea .focusContent .focusMeta .focusMenu .menuText a {
+            text-decoration: none;
+            color: black; }
     .appGrid #focusArea .focusContent .focusContentGrid {
       display: grid;
       grid-template-columns: auto 500px;
@@ -157,37 +159,41 @@ button {
         cursor: pointer; }
       .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviewSubmitArea .submit .submitControls .submitButton {
         background-color: grey; }
-      .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader {
-        display: flex; }
-        .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewPFP {
-          max-width: 45px;
-          margin-right: 10px; }
-          .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewPFP img {
-            width: 100%;
-            border-radius: 50%; }
-        .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText {
-          display: grid;
-          grid-template-columns: 1fr; }
-          .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .reviewUser {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 5px; }
-          .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .row2 {
+      .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews {
+        margin-top: 20px; }
+        .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview {
+          margin-bottom: 20px; }
+          .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader {
             display: flex; }
-            .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .row2 .reviewRating {
-              width: 120px; }
-              .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .row2 .reviewRating svg {
-                max-width: 100px; }
-            .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .row2 .reviewDate {
-              font-size: 15px; }
-      .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewContent {
-        padding: 5px; }
-        .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewContent .reviewTitle {
-          font-weight: bold;
-          margin-bottom: 5px;
-          font-size: 20px; }
-        .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewContent .reviewBody {
-          font-size: 18px; }
+            .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewPFP {
+              max-width: 45px;
+              margin-right: 10px; }
+              .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewPFP img {
+                width: 100%;
+                border-radius: 50%; }
+            .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText {
+              display: grid;
+              grid-template-columns: 1fr; }
+              .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .reviewUser {
+                font-size: 20px;
+                font-weight: bold;
+                margin-bottom: 5px; }
+              .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .row2 {
+                display: flex; }
+                .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .row2 .reviewRating {
+                  width: 120px; }
+                  .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .row2 .reviewRating svg {
+                    max-width: 100px; }
+                .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .row2 .reviewDate {
+                  font-size: 15px; }
+          .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewContent {
+            padding: 5px; }
+            .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewContent .reviewTitle {
+              font-weight: bold;
+              margin-bottom: 5px;
+              font-size: 20px; }
+            .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewContent .reviewBody {
+              font-size: 18px; }
       .appGrid #focusArea .focusContent .focusContentGrid .focusRelated .relatedRestaurant {
         background-color: white;
         border-radius: 5px;

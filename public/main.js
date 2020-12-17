@@ -60,9 +60,13 @@ const focusDish = (id) => {
                 <div class="focusPrice">${selectedDish.price}</div>
             </div>
         </header>
-        <div class="focusPhotos">${selectedDish.pictures.map(pic => {
-            return `<img src="${pic}" alt="selected dish image" />`
-        })}</div>
+        <div class="focusPhotos">
+        ${
+            selectedDish.pictures.reduce((acc, pic) => {
+                return acc + `<img src="${pic}" alt="selected dish image" />`
+            }, '')
+        }
+        </div>
         <div class="focusContent">
             <div class="focusMeta">
                 <div class="focusItem">
@@ -112,27 +116,10 @@ const focusDish = (id) => {
                     <div class="reviewSubmitArea">
                         
                     </div>
+
+                    <!-- Reviews --> 
                     <div class="reviews">
-                    ${selectedDish.reviews.map(review => {
-                        return `
-                        <div class="focusReview">
-                            <div class="reviewHeader">
-                                <div class="reviewPFP"><img src="./images/anonProfilePic.png" alt="user profile picture"></img></div>
-                                <div class="reviewHeaderText">
-                                    <div class="reviewUser">${review.user.username}</div>
-                                    <div class="row2">
-                                        <div class="reviewRating">${returnStars(review.rating)}</div>
-                                        <div class="reviewDate">${returnDate(review.date)}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="reviewContent">
-                                <div class="reviewTitle">${review.title}</div>
-                                <div class="reviewBody">${review.body}</div>
-                            </div>
-                        </div>
-                        `
-                    })}
+
                     </div>
                 </div>
                 <div class="focusRelated">
@@ -145,6 +132,9 @@ const focusDish = (id) => {
             </div>
         </div>
     `
+
+    // insert reviews
+    getReviews()
 
     // get restaurants, populate .restaurantDishes
     getOneRestaurant(selectedDish.restaurant._id).then(results => {
@@ -247,25 +237,26 @@ const closeSubmitArea = () => {
 
 const getReviews = () => {
     let outputArea = document.querySelector('.reviews')
-    let output = ''
-
-    selectedDish.reviews.forEach(review => {
-        output += `
-        <div class="focusReview">
-            <div class="reviewHeader">
-                <div class="reviewPFP"><img src="./images/anonProfilePic.png" alt="user profile picture"></img></div>
-                <div class="reviewUser">${review.user.username}</div>
-                <div class="reviewRating">${returnStars(review.rating)}</div>
-                <div class="reviewDate">${returnDate(review.date)}</div>
+    outputArea.innerHTML = selectedDish.reviews.reduce((acc, review) => {
+        return acc + `
+            <div class="focusReview">
+                <div class="reviewHeader">
+                    <div class="reviewPFP"><img src="./images/anonProfilePic.png" alt="user profile picture"></img></div>
+                    <div class="reviewHeaderText">
+                        <div class="reviewUser">${review.user.username}</div>
+                        <div class="row2">
+                            <div class="reviewRating">${returnStars(review.rating)}</div>
+                            <div class="reviewDate">${returnDate(review.date)}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reviewContent">
+                    <div class="reviewTitle">${review.title}</div>
+                    <div class="reviewBody">${review.body}</div>
+                </div>
             </div>
-            <div class="reviewContent">
-                <div class="reviewTitle">${review.title}</div>
-                <div class="reviewBody">${review.body}</div>
-            </div>
-        </div>
         `
-    })
-    outputArea.innerHTML = output
+    }, '')
 }
 
 const interactiveStars = () => {
@@ -327,17 +318,6 @@ const getDishes = async (query) => {
     let dishes = await response.json()
     return dishes
 }
-
-// const updateSelectedDish = async () => {
-//     let url = `/dish/` + selectedDish._id
-//     let response = await fetch(url)
-//     console.log(response)
-//     let object = await response.json()
-//     object.then(dish => {
-//         selectedDish = dish
-//         console.log(dish)
-//     })
-// }
 
 const getAllRestaurants = async () => {
     let url = '/restaurants'
