@@ -227,6 +227,15 @@
                                         }
                                     }
                                 }
+                                .editBtn {
+                                    height: 15px;
+                                    font-size: 14px;
+                                    padding: 10px;
+                                    border-radius: 10px;
+                                    margin-left: 15px;
+                                    background-color: rgb(233, 233, 233);
+                                    cursor: pointer;
+                                }
                             }
                             .reviewContent {
                                 padding: 5px;
@@ -282,6 +291,41 @@
                     }
                 }
             }
+        }
+    }
+}
+
+// global submit / edit boxes
+.submit, .edit {
+    .submitInfo, .editInfo {
+        input[type=text] {
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            padding: 10px;
+        }
+    }
+    textarea, .editBody {
+        width: 500px;
+        height: 150px;
+        font-size: 16px;
+        border-radius: 10px;
+        border: none;
+        padding: 10px;
+        box-shadow: 4px 3px 19px 1px rgba(0,0,0,0.15);
+    }
+    .submitControls, .editControls {
+        .submitButton, .submitButtonEdit {
+            cursor: pointer;
+            background-color: grey;
+        }
+
+        .cancelButton, .cancelButtonEdit {
+            
+        }
+        
+        .deleteButton {
+            background-color: rgb(219, 41, 79);
         }
     }
 }

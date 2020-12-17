@@ -237,9 +237,9 @@ const closeSubmitArea = () => {
 
 const getReviews = () => {
     let outputArea = document.querySelector('.reviews')
-    outputArea.innerHTML = selectedDish.reviews.reduce((acc, review) => {
+    outputArea.innerHTML = selectedDish.reviews.reduce((acc, review, index) => {
         return acc + `
-            <div class="focusReview">
+            <div class="focusReview" data-id="${review._id}" index="${index}" id="review${index}">
                 <div class="reviewHeader">
                     <div class="reviewPFP"><img src="./images/anonProfilePic.png" alt="user profile picture"></img></div>
                     <div class="reviewHeaderText">
@@ -249,6 +249,7 @@ const getReviews = () => {
                             <div class="reviewDate">${returnDate(review.date)}</div>
                         </div>
                     </div>
+                    <div class="editBtn">Edit</div>
                 </div>
                 <div class="reviewContent">
                     <div class="reviewTitle">${review.title}</div>
@@ -257,6 +258,83 @@ const getReviews = () => {
             </div>
         `
     }, '')
+
+    // assign edit button event listeners
+    let editBtns = document.querySelectorAll('.focusReview .editBtn')
+    console.log(editBtns)
+
+    editBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            openEditBox(e)
+        })
+    })
+}
+
+//open edit box
+const openEditBox = (e) => {
+    // toggle a reviews edit mode
+    let index = Number(e.target.parentElement.parentElement.getAttribute('index'))
+    console.log(index)
+    let selected = selectedDish.reviews[index]
+    e.target.parentElement.parentElement.innerHTML = `
+    <div class="edit">
+        <div class="editInfo">
+            <input class="submitTitle" type="text" placeholder="Enter Review Title" value="${selected.title}">
+            <div class="interactiveStars">
+                <!-- insert stars via JS -->
+            </div>
+        </div>
+        <textarea class="editBody" placeholder="Enter your review here...">${selected.body}</textarea>
+        <div class="editControls">
+            <button class="submitButtonEdit">Submit</button>
+            <button class="cancelButtonEdit">Cancel</button>
+            <button class="deleteButton">Delete</button>
+        </div>
+    </div>
+    `
+
+    // event listeners
+    document.querySelector('.submitButtonEdit').addEventListener('click', () => {
+        console.log('SUBMIT THE EDIT!')
+    })
+    document.querySelector('.cancelButtonEdit').addEventListener('click', () => {
+        console.log('CANCEL THE EDIT!')
+        closeEditBox(index)
+    })
+    document.querySelector('.deleteButton').addEventListener('click', () => {
+        console.log('DELETE THE TODO')
+    })
+
+}
+
+//close edit box
+const closeEditBox = (index) => {
+    let review = selectedDish.reviews[index]
+    console.log(`Index: ${index}`)
+    document.querySelector(`#review${index}`).innerHTML = `
+        <div class="reviewHeader">
+            <div class="reviewPFP"><img src="./images/anonProfilePic.png" alt="user profile picture"></img></div>
+            <div class="reviewHeaderText">
+                <div class="reviewUser">${review.user.username}</div>
+                <div class="row2">
+                    <div class="reviewRating">${returnStars(review.rating)}</div>
+                    <div class="reviewDate">${returnDate(review.date)}</div>
+                </div>
+            </div>
+            <div class="editBtn">Edit</div>
+        </div>
+        <div class="reviewContent">
+            <div class="reviewTitle">${review.title}</div>
+            <div class="reviewBody">${review.body}</div>
+        </div>
+    `
+
+    // assign edit button event listeners
+    let editBtn = document.querySelector(`.editBtn`)
+
+    editBtn.addEventListener('click', (e) => {
+        openEditBox(e)
+    })
 }
 
 const interactiveStars = () => {
