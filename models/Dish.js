@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const DishSchema = new mongoose.Schema({
   name: String, 
   price: String,
+  available: Boolean,
   restaurant: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Restaurant'

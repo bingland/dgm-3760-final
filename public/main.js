@@ -103,6 +103,21 @@ const focusDish = (id) => {
                     </div>
                     <div class="focusItemValue">Drive Thru</div>
                 </div>
+                <div class="focusItem">
+                    <div class="focusItemCheck">
+                        <!-- Item Availability -->
+                        ${selectedDish.available === true ? `
+                            <svg viewBox="0 0 22.947 17.87">
+                                <path d="M25.947,6.638,11.72,22.87,3,15.2l1.681-1.9,6.809,5.974L24.066,5l1.88,1.638Z" transform="translate(-3 -5)" fill="#519b76" fill-rule="evenodd"/>
+                            </svg>
+                        ` : `
+                            <svg viewBox="0 0 24 24">
+                                <path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z" fill="#D63A46"/>
+                            </svg>
+                        `}
+                    </div>
+                    <div class="focusItemValue">Item Availability</div>
+                </div>
                 <div class="focusMenu">
                     <div class="menuText"><a href="${selectedDish.restaurant.menu}" target="blank">${selectedDish.restaurant.name} Menu</a></div>
                 </div>

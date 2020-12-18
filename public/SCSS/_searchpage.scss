@@ -37,6 +37,15 @@
         }
 
         #resultsArea {
+
+            #resultsAreaMessage {
+                padding: 15px;
+                color: rgb(168, 168, 168);
+                line-height: 1.3;
+                font-size: 20px;
+                text-align: center;
+                font-weight: lighter;
+            }
             
             .dish {
                 display: flex;
@@ -89,7 +98,17 @@
         }
     }
     #focusArea {
-        padding: 20px;
+        padding: 30px;
+
+        #focusAreaMessage {
+            padding: 15px;
+            color: rgb(168, 168, 168);
+            line-height: 1.3;
+            font-size: 40px;
+            text-align: center;
+            font-weight: lighter;
+            margin-top: 50px;
+        }
 
         header {
             .focusName {
@@ -120,7 +139,8 @@
         .focusPhotos {
             img {
                 max-width: 200px;
-                max-height: 150px;
+                height: 150px;
+                padding-left: 5px;
             }
         }
         // Content dividing grid
@@ -147,6 +167,7 @@
                 }
                 .focusMenu {
                     padding: 10px;
+                    margin-left: 10px;
                     border-radius: 10px;
                     background-color: rgb(235, 235, 235);
 
@@ -167,6 +188,7 @@
                 display: grid; 
                 grid-template-columns: auto 500px;
                 grid-gap: 20px;
+                max-width: 1000px;
 
                 .focusReviews {
 
@@ -215,13 +237,15 @@
                                         font-size: 20px;
                                         font-weight: bold;
                                         margin-bottom: 5px;
+                                        text-transform: capitalize;
                                     }
 
                                     .row2 {
                                         display: flex;
 
                                         .reviewRating {
-                                            width: 120px;
+                                            width: auto;
+                                            padding-right: 10px;
                                             //background-color: pink;
                                             
                                             svg {
@@ -339,11 +363,12 @@
         }
 
         .cancelButton, .cancelButtonEdit {
-            
+            cursor: pointer;
         }
         
         .deleteButton {
             background-color: rgb(219, 41, 79);
+            cursor: pointer;
         }
     }
 }

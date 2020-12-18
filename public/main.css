@@ -92,6 +92,13 @@ button {
         font-size: 16px;
         border: 1px solid grey;
         cursor: pointer; }
+    .appGrid .searchArea #resultsArea #resultsAreaMessage {
+      padding: 15px;
+      color: #a8a8a8;
+      line-height: 1.3;
+      font-size: 20px;
+      text-align: center;
+      font-weight: lighter; }
     .appGrid .searchArea #resultsArea .dish {
       display: flex;
       padding: 5px 10px;
@@ -124,7 +131,15 @@ button {
     .appGrid .searchArea #resultsArea .dish:hover {
       background-color: white; }
   .appGrid #focusArea {
-    padding: 20px; }
+    padding: 30px; }
+    .appGrid #focusArea #focusAreaMessage {
+      padding: 15px;
+      color: #a8a8a8;
+      line-height: 1.3;
+      font-size: 40px;
+      text-align: center;
+      font-weight: lighter;
+      margin-top: 50px; }
     .appGrid #focusArea header .focusName {
       font-size: 70px;
       font-weight: 700; }
@@ -144,7 +159,8 @@ button {
         padding-top: 3px; }
     .appGrid #focusArea .focusPhotos img {
       max-width: 200px;
-      max-height: 150px; }
+      height: 150px;
+      padding-left: 5px; }
     .appGrid #focusArea .focusContent .focusMeta {
       display: flex;
       padding: 20px 0; }
@@ -161,6 +177,7 @@ button {
           font-weight: bold; }
       .appGrid #focusArea .focusContent .focusMeta .focusMenu {
         padding: 10px;
+        margin-left: 10px;
         border-radius: 10px;
         background-color: #ebebeb; }
         .appGrid #focusArea .focusContent .focusMeta .focusMenu .menuText {
@@ -172,7 +189,8 @@ button {
     .appGrid #focusArea .focusContent .focusContentGrid {
       display: grid;
       grid-template-columns: auto 500px;
-      grid-gap: 20px; }
+      grid-gap: 20px;
+      max-width: 1000px; }
       .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviewBar {
         display: flex;
         margin-bottom: 10px; }
@@ -202,11 +220,13 @@ button {
               .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .reviewUser {
                 font-size: 20px;
                 font-weight: bold;
-                margin-bottom: 5px; }
+                margin-bottom: 5px;
+                text-transform: capitalize; }
               .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .row2 {
                 display: flex; }
                 .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .row2 .reviewRating {
-                  width: 120px; }
+                  width: auto;
+                  padding-right: 10px; }
                   .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .row2 .reviewRating svg {
                     max-width: 100px; }
                 .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .row2 .reviewDate {
@@ -273,8 +293,11 @@ button {
 .submit .submitControls .submitButton, .submit .submitControls .submitButtonEdit, .submit .editControls .submitButton, .submit .editControls .submitButtonEdit, .edit .submitControls .submitButton, .edit .submitControls .submitButtonEdit, .edit .editControls .submitButton, .edit .editControls .submitButtonEdit {
   cursor: pointer;
   background-color: grey; }
+.submit .submitControls .cancelButton, .submit .submitControls .cancelButtonEdit, .submit .editControls .cancelButton, .submit .editControls .cancelButtonEdit, .edit .submitControls .cancelButton, .edit .submitControls .cancelButtonEdit, .edit .editControls .cancelButton, .edit .editControls .cancelButtonEdit {
+  cursor: pointer; }
 .submit .submitControls .deleteButton, .submit .editControls .deleteButton, .edit .submitControls .deleteButton, .edit .editControls .deleteButton {
-  background-color: #db294f; }
+  background-color: #db294f;
+  cursor: pointer; }
 
 .svgStar {
   width: 18px;
