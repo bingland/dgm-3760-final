@@ -49,6 +49,15 @@ table {
   font-family: 'Raleway', sans-serif;
   outline: none; }
 
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+html, body {
+  height: 100%; }
+
 button {
   font-size: 16px;
   border-radius: 10px;
@@ -58,35 +67,62 @@ button {
 
 .appGrid {
   display: grid;
-  grid-template-columns: 300px auto; }
+  grid-template-columns: 350px auto;
+  height: 100%; }
   .appGrid .searchArea {
-    background-color: silver;
-    padding: 10px; }
+    background-color: #f0f0f0;
+    border-right: 1px solid rgba(128, 128, 128, 0.164); }
     .appGrid .searchArea h1 {
-      font-size: 30px;
-      font-weight: 700; }
+      font-size: 40px;
+      font-weight: 700;
+      text-align: center;
+      padding: 15px 0;
+      padding-bottom: 10px; }
     .appGrid .searchArea form {
-      padding: 10px 0; }
+      padding: 10px; }
       .appGrid .searchArea form input {
         padding: 10px;
-        font-size: 15px; }
+        font-size: 15px;
+        border-radius: 5px; }
+      .appGrid .searchArea form #searchBar {
+        border: 1px solid #525252; }
+      .appGrid .searchArea form #searchSubmit {
+        background-color: grey;
+        color: white;
+        font-size: 16px;
+        border: 1px solid grey;
+        cursor: pointer; }
     .appGrid .searchArea #resultsArea .dish {
-      background-color: white;
-      border: 1px solid grey;
-      border-radius: 4px;
-      display: inline-block;
-      padding: 5px;
-      cursor: pointer; }
+      display: flex;
+      padding: 5px 10px;
+      cursor: pointer;
+      width: 100%;
+      height: 70px;
+      box-sizing: border-box; }
       .appGrid .searchArea #resultsArea .dish .dishPic {
-        max-width: 70px; }
+        max-width: 60px; }
         .appGrid .searchArea #resultsArea .dish .dishPic img {
           width: 100%;
           border-radius: 10px; }
-      .appGrid .searchArea #resultsArea .dish .dishName {
-        font-size: 20px;
-        font-weight: bold; }
-      .appGrid .searchArea #resultsArea .dish .restaurantName {
-        font-weight: 12px; }
+      .appGrid .searchArea #resultsArea .dish .dishText {
+        display: grid;
+        padding-left: 10px;
+        padding-top: 8px; }
+        .appGrid .searchArea #resultsArea .dish .dishText .dishName {
+          font-size: 20px;
+          font-weight: bold;
+          height: 0px; }
+        .appGrid .searchArea #resultsArea .dish .dishText .row2 {
+          display: flex;
+          align-items: center;
+          height: 70px; }
+          .appGrid .searchArea #resultsArea .dish .dishText .row2 .restaurantName {
+            font-weight: 12px;
+            padding-right: 10px; }
+          .appGrid .searchArea #resultsArea .dish .dishText .row2 .dishPrice {
+            padding-left: 10px; }
+    .appGrid .searchArea #resultsArea .dish:hover {
+      background-color: white; }
   .appGrid #focusArea {
     padding: 20px; }
     .appGrid #focusArea header .focusName {
@@ -102,7 +138,10 @@ button {
       .appGrid #focusArea header .focusInfo .focusRating {
         padding-right: 10px; }
       .appGrid #focusArea header .focusInfo .focusReviewCount {
-        padding-right: 10px; }
+        padding-right: 10px;
+        padding-top: 3px; }
+      .appGrid #focusArea header .focusInfo .focusPrice {
+        padding-top: 3px; }
     .appGrid #focusArea .focusPhotos img {
       max-width: 200px;
       max-height: 150px; }
@@ -111,19 +150,21 @@ button {
       padding: 20px 0; }
       .appGrid #focusArea .focusContent .focusMeta .focusItem {
         display: flex;
-        margin-right: 10px; }
-        .appGrid #focusArea .focusContent .focusMeta .focusItem .focusItemCheck svg {
-          width: 24px; }
+        margin-right: 10px;
+        padding-top: 5px; }
+        .appGrid #focusArea .focusContent .focusMeta .focusItem .focusItemCheck {
+          padding-right: 10px; }
+          .appGrid #focusArea .focusContent .focusMeta .focusItem .focusItemCheck svg {
+            width: 24px; }
         .appGrid #focusArea .focusContent .focusMeta .focusItem .focusItemValue {
           font-size: 20px;
           font-weight: bold; }
       .appGrid #focusArea .focusContent .focusMeta .focusMenu {
         padding: 10px;
         border-radius: 10px;
-        background-color: #c5c5c5; }
+        background-color: #ebebeb; }
         .appGrid #focusArea .focusContent .focusMeta .focusMenu .menuText {
-          font-weight: bold;
-          font-size: 20px;
+          font-size: 16px;
           display: inline-block; }
           .appGrid #focusArea .focusContent .focusMeta .focusMenu .menuText a {
             text-decoration: none;
@@ -140,29 +181,13 @@ button {
           font-weight: bold;
           margin-right: 20px; }
         .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviewBar .submitAppear {
-          background-color: lightgray;
-          border-radius: 10px; }
-      .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviewSubmitArea .submit .submitInfo input[type=text] {
-        font-size: 20px;
-        font-weight: bold;
-        border: none;
-        padding: 10px; }
-      .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviewSubmitArea .submit textarea {
-        width: 500px;
-        height: 150px;
-        font-size: 16px;
-        border-radius: 10px;
-        border: none;
-        padding: 10px;
-        box-shadow: 4px 3px 19px 1px rgba(0, 0, 0, 0.15); }
-      .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviewSubmitArea .submit .submitControls .submitButton, .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviewSubmitArea .submit .submitControls .cancelButton {
-        cursor: pointer; }
-      .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviewSubmitArea .submit .submitControls .submitButton {
-        background-color: grey; }
+          background-color: #ececec;
+          border-radius: 10px;
+          cursor: pointer; }
       .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews {
         margin-top: 20px; }
         .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview {
-          margin-bottom: 20px; }
+          margin-bottom: 23px; }
           .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader {
             display: flex; }
             .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewPFP {
@@ -187,7 +212,7 @@ button {
                 .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .reviewHeaderText .row2 .reviewDate {
                   font-size: 15px; }
             .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewHeader .editBtn {
-              height: 15px;
+              height: 34px;
               font-size: 14px;
               padding: 10px;
               border-radius: 10px;
@@ -195,13 +220,15 @@ button {
               background-color: #e9e9e9;
               cursor: pointer; }
           .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewContent {
-            padding: 5px; }
+            padding: 5px;
+            padding-top: 10px; }
             .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewContent .reviewTitle {
               font-weight: bold;
               margin-bottom: 5px;
               font-size: 20px; }
             .appGrid #focusArea .focusContent .focusContentGrid .focusReviews .reviews .focusReview .reviewContent .reviewBody {
-              font-size: 18px; }
+              font-size: 17px;
+              line-height: 1.3; }
       .appGrid #focusArea .focusContent .focusContentGrid .focusRelated .relatedRestaurant {
         background-color: white;
         border-radius: 5px;
@@ -211,22 +238,29 @@ button {
           font-weight: bold;
           padding-bottom: 10px; }
         .appGrid #focusArea .focusContent .focusContentGrid .focusRelated .relatedRestaurant .restaurantDishes .restaurantDish {
-          display: flex; }
+          display: flex;
+          padding-top: 5px; }
           .appGrid #focusArea .focusContent .focusContentGrid .focusRelated .relatedRestaurant .restaurantDishes .restaurantDish .dishThumb {
-            max-width: 75px; }
+            max-width: 60px; }
             .appGrid #focusArea .focusContent .focusContentGrid .focusRelated .relatedRestaurant .restaurantDishes .restaurantDish .dishThumb img {
               width: 100%;
               border-radius: 10px; }
           .appGrid #focusArea .focusContent .focusContentGrid .focusRelated .relatedRestaurant .restaurantDishes .restaurantDish .row2 {
-            display: grid; }
+            display: grid;
+            padding-left: 10px;
+            padding-top: 6px; }
             .appGrid #focusArea .focusContent .focusContentGrid .focusRelated .relatedRestaurant .restaurantDishes .restaurantDish .row2 .dishName {
-              font-size: 20px; }
+              font-size: 20px;
+              height: 10px; }
+            .appGrid #focusArea .focusContent .focusContentGrid .focusRelated .relatedRestaurant .restaurantDishes .restaurantDish .row2 .dishRating {
+              height: 20px; }
 
 .submit .submitInfo input[type=text], .submit .editInfo input[type=text], .edit .submitInfo input[type=text], .edit .editInfo input[type=text] {
   font-size: 20px;
   font-weight: bold;
   border: none;
-  padding: 10px; }
+  padding: 10px;
+  padding-left: 0; }
 .submit textarea, .submit .editBody, .edit textarea, .edit .editBody {
   width: 500px;
   height: 150px;
@@ -234,11 +268,20 @@ button {
   border-radius: 10px;
   border: none;
   padding: 10px;
-  box-shadow: 4px 3px 19px 1px rgba(0, 0, 0, 0.15); }
+  margin-top: 10px;
+  border: 1px solid #d4d4d4; }
 .submit .submitControls .submitButton, .submit .submitControls .submitButtonEdit, .submit .editControls .submitButton, .submit .editControls .submitButtonEdit, .edit .submitControls .submitButton, .edit .submitControls .submitButtonEdit, .edit .editControls .submitButton, .edit .editControls .submitButtonEdit {
   cursor: pointer;
   background-color: grey; }
 .submit .submitControls .deleteButton, .submit .editControls .deleteButton, .edit .submitControls .deleteButton, .edit .editControls .deleteButton {
   background-color: #db294f; }
+
+.svgStar {
+  width: 18px;
+  height: 20px;
+  margin-right: 2px; }
+
+.ratingStar {
+  cursor: pointer; }
 
 /*# sourceMappingURL=main.css.map */
