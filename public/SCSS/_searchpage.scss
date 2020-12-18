@@ -1,3 +1,8 @@
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 .appGrid {
     display: grid;
     grid-template-columns: 350px auto;
@@ -17,14 +22,17 @@
 
         form {
             padding: 10px;
+            width: 100%;
 
             input {
                 padding: 10px;
                 font-size: 15px;
                 border-radius: 5px;
+                display: inline-block;
             }
             #searchBar {
                 border: 1px solid rgb(82, 82, 82);
+                width: 240px;
             }
             #searchSubmit {
                 background-color: grey;
@@ -32,7 +40,6 @@
                 font-size: 16px;
                 border: 1px solid grey;
                 cursor: pointer;
-                
             }
         }
 
@@ -54,6 +61,7 @@
                 width: 100%;
                 height: 70px;
                 box-sizing: border-box;
+                animation: fadeIn 0.5s;
 
                 .dishPic {
                     max-width: 60px;
@@ -111,6 +119,8 @@
         }
 
         header {
+            animation: fadeIn 0.5s;
+
             .focusName {
                 font-size: 70px;
                 font-weight: 700;
@@ -137,6 +147,7 @@
             }
         }
         .focusPhotos {
+            animation: fadeIn 0.5s;
             img {
                 max-width: 200px;
                 height: 150px;
@@ -145,6 +156,8 @@
         }
         // Content dividing grid
         .focusContent {
+            animation: fadeIn 0.5s;
+
             .focusMeta {
                 display: flex;
                 padding: 20px 0;
@@ -205,6 +218,7 @@
                             background-color: rgb(236, 236, 236);
                             border-radius: 10px;
                             cursor: pointer;
+                            animation: fadeIn 0.5s;
                         }
                     }
                     // REVIEW SUBMIT AREA
@@ -216,6 +230,7 @@
 
                         .focusReview {
                             margin-bottom: 23px;
+                            animation: fadeIn 0.5s;
 
                             .reviewHeader {
                                 display: flex;
@@ -303,6 +318,8 @@
                             .restaurantDish {
                                 display: flex;
                                 padding-top: 5px;
+                                animation: fadeIn 0.5s;
+                                cursor: pointer;
 
                                 .dishThumb {
                                     max-width: 60px;
@@ -336,6 +353,8 @@
 
 // global submit / edit boxes
 .submit, .edit {
+    animation: fadeIn 0.5s;
+
     .submitInfo, .editInfo {
         input[type=text] {
             font-size: 20px;
@@ -346,7 +365,7 @@
         }
     }
     textarea, .editBody {
-        width: 500px;
+        width: 100%;
         height: 150px;
         font-size: 16px;
         border-radius: 10px;

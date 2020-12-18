@@ -153,7 +153,7 @@ const focusDish = (id) => {
     `
 
     // insert reviews
-    getReviews()
+    setTimeout(getReviews, 100)
 
     // get restaurants, populate .restaurantDishes
     getOneRestaurant(selectedDish.restaurant._id).then(results => {
@@ -161,15 +161,24 @@ const focusDish = (id) => {
         div.innerHTML = ''
         console.log(results)
         results.dishes.forEach(dish => {
-            div.innerHTML += `
-                <div class="restaurantDish">
-                    <div class="dishThumb"><img src="${dish.thumbnail}" alt="${dish.name}" /></div>
-                    <div class="row2">
-                        <div class="dishName">${dish.name}</div>
-                        <div class="dishRating">${returnStars(calcRating(dish.reviews.map(review => review.rating)))} ${dish.price}</div>
+            if (dish._id !== selectedDish._id) {
+                div.innerHTML += `
+                    <div class="restaurantDish" data-id="${dish._id}">
+                        <div class="dishThumb"><img src="${dish.thumbnail}" alt="${dish.name}" /></div>
+                        <div class="row2">
+                            <div class="dishName">${dish.name}</div>
+                            <div class="dishRating">${returnStars(calcRating(dish.reviews.map(review => review.rating)))} ${dish.price}</div>
+                        </div>
                     </div>
-                </div>
-            `
+                `
+            }
+        })
+
+        // restaurantDish opens up that dish onclick 
+        document.querySelectorAll('.restaurantDish').forEach(item => {
+            item.addEventListener('click', () => {
+                focusDish(item.getAttribute('data-id'))
+            })
         })
     })
 
@@ -180,6 +189,9 @@ const focusDish = (id) => {
 }
 
 const calcRating = (ratings) => {
+    if (ratings.length === 0) {
+        return 0
+    }
     return ratings.reduce((a, b) => a + b) / ratings.length
 }
 
@@ -316,7 +328,6 @@ const openEditBox = (e) => {
 
     // event listeners
     document.querySelector('.submitButtonEdit').addEventListener('click', () => {
-        console.log('SUBMIT THE EDIT!')
         let submitTitle = document.querySelector(`#review${index} .edit .editInfo .submitTitle`).value
         let submitBody = document.querySelector(`#review${index} .edit .editBody`).value
         let submitRating = document.querySelector(`#stars${index}`).getAttribute('data-id')
@@ -324,11 +335,9 @@ const openEditBox = (e) => {
         closeEditBox(index)
     })
     document.querySelector('.cancelButtonEdit').addEventListener('click', () => {
-        console.log('CANCEL THE EDIT!')
         closeEditBox(index)
     })
     document.querySelector('.deleteButton').addEventListener('click', () => {
-        console.log('DELETE THE TODO')
         if (confirm('Are you sure you want to delete this todo? This can\'t be undone.')) {
             closeEditBox(index)
             deleteReview(selected._id)
@@ -453,9 +462,9 @@ const getOneRestaurant = async (id) => {
 
 const postReview = async () => {
     // example url: localhost:3000/reviews?title=Test Review&body=Wow cool amazing dish omg&rating=4&user=5fa8d7bc6847f97e01a38c38&dish=5fa8d2be6847f97e01a38c35&restaurant=5fa8d36f6847f97e01a38c36
-    let title = document.querySelector('.submitTitle').value
-    let body = document.querySelector('.submitBody').value
-    let url = `/reviews?title=${title}&body=${body}&rating=${userRating}&user=5fa8d7bc6847f97e01a38c38&dish=${selectedDish._id}&restaurant=${selectedDish.restaurant._id}`
+    let title = document.querySelector('.submitTitle').value || "Empty"
+    let body = document.querySelector('.submitBody').value || "Empty"
+    let url = `/reviews?title=${title}&body=${body}&rating=${userRating || 3}&user=5fa8d7bc6847f97e01a38c38&dish=${selectedDish._id}&restaurant=${selectedDish.restaurant._id}`
     console.log(url)
     const func = async () => {
         let response = await fetch(url, {
@@ -465,7 +474,8 @@ const postReview = async () => {
         return dish
     }
     selectedDish = await func()
-    getReviews()
+
+    setTimeout(getReviews, 100)
     closeSubmitArea()
 }
 
@@ -483,7 +493,7 @@ const editReview = async (id, title, body, rating) => {
     }
     selectedDish = await func()
 
-    getReviews()
+    setTimeout(getReviews, 100)
 }
 
 const deleteReview = async (id) => {
@@ -499,7 +509,7 @@ const deleteReview = async (id) => {
     }
     selectedDish = await func()
 
-    getReviews()
+    setTimeout(getReviews, 100)
 }
 
 // event listeners
