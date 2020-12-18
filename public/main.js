@@ -190,7 +190,7 @@ const displaySubmitArea = () => {
     submitAreaContent.innerHTML = `
         <div class="submitInfo">
             <input class="submitTitle" type="text" placeholder="Enter Review Title">
-            <div class="interactiveStars">
+            <div class="interactiveStars" id="submitStars" data-id="0">
                 <!-- insert stars via JS -->
             </div>
         </div>
@@ -214,7 +214,7 @@ const displaySubmitArea = () => {
         postReview()
     })
 
-    interactiveStars()
+    interactiveStars('#submitStars')
 }
 
 const closeSubmitArea = () => {
@@ -280,7 +280,7 @@ const openEditBox = (e) => {
     <div class="edit">
         <div class="editInfo">
             <input class="submitTitle" type="text" placeholder="Enter Review Title" value="${selected.title}">
-            <div class="interactiveStars">
+            <div class="interactiveStars" id="stars${index}" data-id="${selected.rating}">
                 <!-- insert stars via JS -->
             </div>
         </div>
@@ -293,9 +293,16 @@ const openEditBox = (e) => {
     </div>
     `
 
+    interactiveStars(`#stars${index}`)
+
     // event listeners
     document.querySelector('.submitButtonEdit').addEventListener('click', () => {
         console.log('SUBMIT THE EDIT!')
+        let submitTitle = document.querySelector(`#review${index} .edit .editInfo .submitTitle`).value
+        let submitBody = document.querySelector(`#review${index} .edit .editBody`).value
+        let submitRating = document.querySelector(`#stars${index}`).getAttribute('data-id')
+        editReview(selected._id, submitTitle, submitBody, submitRating)
+        closeEditBox(index)
     })
     document.querySelector('.cancelButtonEdit').addEventListener('click', () => {
         console.log('CANCEL THE EDIT!')
@@ -303,6 +310,10 @@ const openEditBox = (e) => {
     })
     document.querySelector('.deleteButton').addEventListener('click', () => {
         console.log('DELETE THE TODO')
+        if (confirm('Are you sure you want to delete this todo? This can\'t be undone.')) {
+            closeEditBox(index)
+            deleteReview(selected._id)
+        }
     })
 
 }
@@ -337,28 +348,38 @@ const closeEditBox = (index) => {
     })
 }
 
-const interactiveStars = () => {
-    let starArea = document.querySelector('.interactiveStars')
-    console.log(starArea)
+const interactiveStars = (id) => {
+    let starArea = document.querySelector(id)
+    let originalRank = Number(starArea.getAttribute('data-id'))
     
     starArea.innerHTML = ''
     for (let i = 0; i < 5; i++) {
-        starArea.innerHTML += `
-            <svg class="ratingStar" data-id="${i + 1}" width="24" height="24" viewBox="0 0 24 24"><path data-id="${i + 1}" d="M12 5.173l2.335 4.817 5.305.732-3.861 3.71.942 5.27-4.721-2.524-4.721 2.525.942-5.27-3.861-3.71 5.305-.733 2.335-4.817zm0-4.586l-3.668 7.568-8.332 1.151 6.064 5.828-1.48 8.279 7.416-3.967 7.416 3.966-1.48-8.279 6.064-5.827-8.332-1.15-3.668-7.569z"/></svg>
-        `
+        if(i < originalRank) {
+            starArea.innerHTML += `
+                <svg class="ratingStar" data-id="${i + 1}" width="24" height="24" viewBox="0 0 24 24"><path data-id="${i + 1}" d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+            `
+        } else {
+            starArea.innerHTML += `
+                <svg class="ratingStar" data-id="${i + 1}" width="24" height="24" viewBox="0 0 24 24"><path data-id="${i + 1}" d="M12 5.173l2.335 4.817 5.305.732-3.861 3.71.942 5.27-4.721-2.524-4.721 2.525.942-5.27-3.861-3.71 5.305-.733 2.335-4.817zm0-4.586l-3.668 7.568-8.332 1.151 6.064 5.828-1.48 8.279 7.416-3.967 7.416 3.966-1.48-8.279 6.064-5.827-8.332-1.15-3.668-7.569z"/></svg>
+            `
+        }
     }
-    document.querySelectorAll('.ratingStar').forEach(star => {
+    document.querySelectorAll(`${id} .ratingStar`).forEach(star => {
         star.addEventListener('click', (e) => {
             starArea.innerHTML = ''
-            starClick(e)
+            starClick(e, id)
         })
     })
+    
 }
 
-const starClick = (e) => {
+const starClick = (e, id) => {
+    console.log(id)
     let output = ''
-    let starArea = document.querySelector('.interactiveStars')
+    let starArea = document.querySelector(id)
+    console.log(starArea)
     userRating = e.target.getAttribute('data-id')
+    starArea.setAttribute('data-id', `${userRating}`)
     for (let i = 0; i < 5; i++) {
         if(i < userRating) {
             output += `
@@ -376,7 +397,7 @@ const starClick = (e) => {
     document.querySelectorAll('.ratingStar').forEach(star => {
         star.addEventListener('click', (e) => {
             starArea.innerHTML = ''
-            starClick(e)
+            starClick(e, id)
         })
     })
     
@@ -427,6 +448,39 @@ const postReview = async () => {
     selectedDish = await func()
     getReviews()
     closeSubmitArea()
+}
+
+
+const editReview = async (id, title, body, rating) => {
+    let url = `/reviews/${id}?title=${title}&body=${body}&rating=${rating}`
+    console.log(url)
+
+    const func = async () => {
+        let response = await fetch(url, {
+            method: 'PUT'
+        })
+        let dish = await response.json()
+        return dish
+    }
+    selectedDish = await func()
+
+    getReviews()
+}
+
+const deleteReview = async (id) => {
+    let url = `/reviews/${id}`
+    console.log(url)
+
+    const func = async () => {
+        let response = await fetch(url, {
+            method: 'DELETE'
+        })
+        let dish = await response.json()
+        return dish
+    }
+    selectedDish = await func()
+
+    getReviews()
 }
 
 // event listeners

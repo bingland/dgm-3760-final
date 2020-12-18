@@ -172,7 +172,13 @@ app.put('/reviews/:id', (req, res) => {
             Dish.findById(`${review.dish}`, (err, results) => {
                 if (err) console.log(err)
             })
-            .populate('reviews')
+            .populate(['reviews'])
+            .populate({
+                path: 'reviews',
+                populate: [
+                    { path: 'user', model: 'User' }
+                ]
+            })
             .exec((err, results) => {
                 if (err) console.log(err)
                 res.json(results)
@@ -219,7 +225,13 @@ app.delete('/reviews/:id', (req, res) => {
                 if (err) console.log(err)
                 console.log(results)
             })
-            .populate('reviews')
+            .populate(['reviews'])
+            .populate({
+                path: 'reviews',
+                populate: [
+                    { path: 'user', model: 'User' }
+                ]
+            })
             .exec((err, results) => {
                 if (err) console.log(err)
                 res.json(results)
