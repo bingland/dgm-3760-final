@@ -490,7 +490,7 @@ const postReview = async () => {
     }
     selectedDish = await func()
 
-    setTimeout(getReviews, 1300)
+    setTimeout(getReviews, 2000)
     closeSubmitArea()
 }
 
@@ -508,7 +508,7 @@ const editReview = async (id, title, body, rating) => {
     }
     selectedDish = await func()
 
-    setTimeout(getReviews, 1000)
+    setTimeout(getReviews, 2000)
 }
 
 const deleteReview = async (id) => {
@@ -524,7 +524,7 @@ const deleteReview = async (id) => {
     }
     selectedDish = await func()
 
-    setTimeout(getReviews, 1000)
+    setTimeout(getReviews, 2000)
 }
 
 // event listeners
