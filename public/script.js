@@ -215,6 +215,10 @@ const returnStars = (rating) => {
 }
 
 const displaySubmitArea = () => {
+    for (let i = 0; i < selectedDish.reviews.length; i++) {
+        closeEditBox(i)
+    }
+
     // submit form HTML
     let submitAreaContent = document.createElement('div')
     submitAreaContent.className = 'submit'
@@ -257,13 +261,15 @@ const closeSubmitArea = () => {
     `
 
     // remove the submit area content
-    document.querySelector('.submit').remove()
-    // add the new review button
-    document.querySelector('.reviewBar').appendChild(submitNewReview)
-    // add event listener for new review button
-    document.querySelector('.submitAppear').addEventListener('click', () => {
-        displaySubmitArea()
-    })
+    if (document.querySelector('.submit')) {
+        document.querySelector('.submit').remove()
+        // add the new review button
+        document.querySelector('.reviewBar').appendChild(submitNewReview)
+        // add event listener for new review button
+        document.querySelector('.submitAppear').addEventListener('click', () => {
+            displaySubmitArea()
+        })
+    }
 }
 
 const getReviews = () => {
@@ -306,6 +312,15 @@ const openEditBox = (e) => {
     // toggle a reviews edit mode
     let index = Number(e.target.parentElement.parentElement.getAttribute('index'))
     let selected = selectedDish.reviews[index]
+
+    // close other edit boxes / submit boxes
+    closeSubmitArea()
+    for (let i = 0; i < selectedDish.reviews.length; i++) {
+        if (i !== index) {
+            closeEditBox(i)
+        }
+    }
+
     console.log(e.target)
     e.target.parentElement.parentElement.innerHTML = `
     <div class="edit">
