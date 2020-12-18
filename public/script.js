@@ -153,7 +153,7 @@ const focusDish = (id) => {
     `
 
     // insert reviews
-    setTimeout(getReviews, 100)
+    getReviews()
 
     // get restaurants, populate .restaurantDishes
     getOneRestaurant(selectedDish.restaurant._id).then(results => {
@@ -475,7 +475,7 @@ const postReview = async () => {
     }
     selectedDish = await func()
 
-    setTimeout(getReviews, 100)
+    setTimeout(getReviews, 1300)
     closeSubmitArea()
 }
 
@@ -493,7 +493,7 @@ const editReview = async (id, title, body, rating) => {
     }
     selectedDish = await func()
 
-    setTimeout(getReviews, 100)
+    setTimeout(getReviews, 1000)
 }
 
 const deleteReview = async (id) => {
@@ -509,7 +509,7 @@ const deleteReview = async (id) => {
     }
     selectedDish = await func()
 
-    setTimeout(getReviews, 100)
+    setTimeout(getReviews, 1000)
 }
 
 // event listeners
