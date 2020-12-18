@@ -6,7 +6,7 @@ https://dgm-3760-final.herokuapp.com/
 
 ### 15 user stories
 
-* As a user, I want to be able to look at dishes a restaurant has ?
+* As a user, I want to be able to look at dishes a restaurant has
 
 * As a user, I want to be able to view reviews on certain dishes
 
@@ -16,7 +16,7 @@ https://dgm-3760-final.herokuapp.com/
 
 * As a user, I would like to be able to search for dishes by using certain keywords (i.e. "mexican")
 
-* As a user, I would like to view dishes that are related to a dish ?
+* As a user, I would like to view dishes that are related to a dish
 
 * As a user, I would like to be able to compare the same dish being sold at different restaurants (i.e. comparing restaurants to see who has the best taco)
 
