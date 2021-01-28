@@ -1,5 +1,5 @@
 # dgm-3760-final
-Final project for DGM 3760
+Final project for DGM 3760; full stack app for dish reviews
 
 ### Link to live site
 https://dgm-3760-final.herokuapp.com/ 
